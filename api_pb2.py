@@ -19,55 +19,10 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\tapi.proto\x12\x11\x63ommunicationsapi\"\x1c\n\x07\x43hannel\x12\x11\n\tchannelId\x18\x01 \x01(\t\"\n\n\x08NoParams\"\x91\x02\n\x0cNotification\x12>\n\x04type\x18\x01 \x01(\x0e\x32\x30.communicationsapi.Notification.NotificationType\x12\x0f\n\x07message\x18\x02 \x01(\t\"\xaf\x01\n\x10NotificationType\x12\x16\n\x12INVITATION_TO_ROOM\x10\x00\x12\x1f\n\x1bINVITATION_TO_ROOM_RESPONSE\x10\x01\x12\x1a\n\x16\x41UTHENTICATION_REQUEST\x10\x02\x12\x1b\n\x17\x41UTHENTICATION_RESPONSE\x10\x03\x12\x0f\n\x0bNEW_MESSAGE\x10\x04\x12\x18\n\x14NEW_MESSAGE_RESPONSE\x10\x05\",\n\x08Response\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"0\n\x0ePublishPayload\x12\r\n\x05topic\x18\x01 \x01(\t\x12\x0f\n\x07message\x18\x02 \x01(\x0c\"^\n\x07Payload\x12\x0c\n\x04\x66rom\x18\x01 \x01(\t\x12\x0f\n\x02to\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x0c\n\x04\x64\x61ta\x18\x03 \x01(\x0c\x12\r\n\x05seqno\x18\x04 \x01(\x0c\x12\x10\n\x08topicIDs\x18\x05 \x03(\tB\x05\n\x03_to2\x9a\x03\n\x11\x43ommunicationsApi\x12G\n\x0bPingChannel\x12\x1b.communicationsapi.NoParams\x1a\x1b.communicationsapi.Response\x12]\n\x1b\x43onnectToCommunicationsNode\x12\x1b.communicationsapi.NoParams\x1a\x1f.communicationsapi.Notification0\x01\x12L\n\x10\x45ndCommunication\x12\x1b.communicationsapi.NoParams\x1a\x1b.communicationsapi.Response\x12I\n\x07Publish\x12!.communicationsapi.PublishPayload\x1a\x1b.communicationsapi.Response\x12\x44\n\tSubscribe\x12\x1a.communicationsapi.Channel\x1a\x1b.communicationsapi.Responseb\x06proto3'
+  serialized_pb=b'\n\tapi.proto\x12\x11\x63ommunicationsapi\"\x1c\n\x07\x43hannel\x12\x11\n\tchannelId\x18\x01 \x01(\t\"0\n\nRskAddress\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x11\n\texclusive\x18\x02 \x01(\x08\",\n\x06PeerId\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x11\n\texclusive\x18\x02 \x01(\x08\"\x06\n\x04Void\"\x16\n\x03Msg\x12\x0f\n\x07payload\x18\x01 \x01(\x0c\"d\n\x0ePublishPayload\x12)\n\x05topic\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\'\n\x07message\x18\x02 \x01(\x0b\x32\x16.communicationsapi.Msg\"\x1d\n\x0bSubscribers\x12\x0e\n\x06peerId\x18\x01 \x03(\t\"I\n\nSubscriber\x12\x0e\n\x06peerId\x18\x01 \x01(\t\x12+\n\x07\x63hannel\x18\x02 \x01(\x0b\x32\x1a.communicationsapi.Channel\" \n\x0f\x42ooleanResponse\x12\r\n\x05value\x18\x01 \x01(\x08\"\xe8\x03\n\x0cNotification\x12\x33\n\npeerNewMsg\x18\x01 \x01(\x0b\x32\x1d.communicationsapi.PeerNewMsgH\x00\x12\x41\n\x11peerChannelInvite\x18\x02 \x01(\x0b\x32$.communicationsapi.PeerChannelInviteH\x00\x12G\n\x14peerSignatureRequest\x18\x03 \x01(\x0b\x32\'.communicationsapi.PeerSignatureRequestH\x00\x12;\n\x0e\x63hannelNewData\x18\x04 \x01(\x0b\x32!.communicationsapi.ChannelNewDataH\x00\x12=\n\x0f\x63hannelPeerLeft\x18\x05 \x01(\x0b\x32\".communicationsapi.ChannelPeerLeftH\x00\x12\x41\n\x11\x63hannelPeerJoined\x18\x06 \x01(\x0b\x32$.communicationsapi.ChannelPeerJoinedH\x00\x12\x43\n\x12serverNotification\x18\x07 \x01(\x0b\x32%.communicationsapi.ServerNotificationH\x00\x42\x13\n\x11notification_type\"{\n\nPeerNewMsg\x12\'\n\x07message\x18\x01 \x01(\x0b\x32\x16.communicationsapi.Msg\x12\x13\n\x06peerId\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x16\n\tsignature\x18\x03 \x01(\x0cH\x01\x88\x01\x01\x42\t\n\x07_peerIdB\x0c\n\n_signature\"\x94\x01\n\x11PeerChannelInvite\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\x12\x12\n\x05nonce\x18\x03 \x01(\x0cH\x00\x88\x01\x01\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x01\x88\x01\x01\x42\x08\n\x06_nonceB\x0c\n\n_signature\"o\n\x14PeerSignatureRequest\x12\x12\n\ndataToSign\x18\x01 \x01(\x0c\x12\x0e\n\x06peerId\x18\x02 \x01(\t\x12\r\n\x05nonce\x18\x03 \x01(\x0c\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x00\x88\x01\x01\x42\x0c\n\n_signature\"y\n\x15PeerSignatureResponse\x12\x0e\n\x06peerId\x18\x01 \x01(\t\x12\x13\n\x0bsignedNonce\x18\x02 \x01(\x0c\x12\x15\n\rdataSignature\x18\x03 \x01(\x0c\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x00\x88\x01\x01\x42\x0c\n\n_signature\"v\n\x0e\x43hannelNewData\x12\x11\n\x04\x66rom\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05nonce\x18\x03 \x01(\x0c\x12+\n\x07\x63hannel\x18\x04 \x03(\x0b\x32\x1a.communicationsapi.ChannelB\x07\n\x05_from\"N\n\x0f\x43hannelPeerLeft\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\"P\n\x11\x43hannelPeerJoined\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\";\n\x12ServerNotification\x12\x14\n\x0cnotification\x18\x01 \x01(\x0c\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\x32\xc7\x08\n\x11\x43ommunicationsApi\x12_\n\x1b\x43onnectToCommunicationsNode\x12\x1d.communicationsapi.RskAddress\x1a\x1f.communicationsapi.Notification0\x01\x12\x44\n\x10\x45ndCommunication\x12\x17.communicationsapi.Void\x1a\x17.communicationsapi.Void\x12\x45\n\x07Publish\x12!.communicationsapi.PublishPayload\x1a\x17.communicationsapi.Void\x12@\n\tSubscribe\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12\x42\n\x0bUnsubscribe\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12L\n\x0eGetSubscribers\x12\x1a.communicationsapi.Channel\x1a\x1e.communicationsapi.Subscribers\x12R\n\rHasSubscriber\x12\x1d.communicationsapi.Subscriber\x1a\".communicationsapi.BooleanResponse\x12>\n\x0bSendMessage\x12\x16.communicationsapi.Msg\x1a\x17.communicationsapi.Void\x12H\n\x0cLocatePeerId\x12\x1d.communicationsapi.RskAddress\x1a\x19.communicationsapi.PeerId\x12U\n\x15\x43reateTopicWithPeerId\x12\x19.communicationsapi.PeerId\x1a\x1f.communicationsapi.Notification0\x01\x12]\n\x19\x43reateTopicWithRskAddress\x12\x1d.communicationsapi.RskAddress\x1a\x1f.communicationsapi.Notification0\x01\x12\x41\n\nCloseTopic\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12P\n\x12SendMessageToTopic\x12!.communicationsapi.PublishPayload\x1a\x17.communicationsapi.Void\x12G\n\rUpdateAddress\x12\x1d.communicationsapi.RskAddress\x1a\x17.communicationsapi.Voidb\x06proto3'
 )
 
 
-
-_NOTIFICATION_NOTIFICATIONTYPE = _descriptor.EnumDescriptor(
-  name='NotificationType',
-  full_name='communicationsapi.Notification.NotificationType',
-  filename=None,
-  file=DESCRIPTOR,
-  create_key=_descriptor._internal_create_key,
-  values=[
-    _descriptor.EnumValueDescriptor(
-      name='INVITATION_TO_ROOM', index=0, number=0,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='INVITATION_TO_ROOM_RESPONSE', index=1, number=1,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='AUTHENTICATION_REQUEST', index=2, number=2,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='AUTHENTICATION_RESPONSE', index=3, number=3,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NEW_MESSAGE', index=4, number=4,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-    _descriptor.EnumValueDescriptor(
-      name='NEW_MESSAGE_RESPONSE', index=5, number=5,
-      serialized_options=None,
-      type=None,
-      create_key=_descriptor._internal_create_key),
-  ],
-  containing_type=None,
-  serialized_options=None,
-  serialized_start=173,
-  serialized_end=348,
-)
-_sym_db.RegisterEnumDescriptor(_NOTIFICATION_NOTIFICATIONTYPE)
 
 
 _CHANNEL = _descriptor.Descriptor(
@@ -102,14 +57,28 @@ _CHANNEL = _descriptor.Descriptor(
 )
 
 
-_NOPARAMS = _descriptor.Descriptor(
-  name='NoParams',
-  full_name='communicationsapi.NoParams',
+_RSKADDRESS = _descriptor.Descriptor(
+  name='RskAddress',
+  full_name='communicationsapi.RskAddress',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
+    _descriptor.FieldDescriptor(
+      name='address', full_name='communicationsapi.RskAddress.address', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='exclusive', full_name='communicationsapi.RskAddress.exclusive', index=1,
+      number=2, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -123,69 +92,86 @@ _NOPARAMS = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=62,
-  serialized_end=72,
+  serialized_end=110,
 )
 
 
-_NOTIFICATION = _descriptor.Descriptor(
-  name='Notification',
-  full_name='communicationsapi.Notification',
+_PEERID = _descriptor.Descriptor(
+  name='PeerId',
+  full_name='communicationsapi.PeerId',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='type', full_name='communicationsapi.Notification.type', index=0,
-      number=1, type=14, cpp_type=8, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='message', full_name='communicationsapi.Notification.message', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      name='address', full_name='communicationsapi.PeerId.address', index=0,
+      number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-    _NOTIFICATION_NOTIFICATIONTYPE,
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=75,
-  serialized_end=348,
-)
-
-
-_RESPONSE = _descriptor.Descriptor(
-  name='Response',
-  full_name='communicationsapi.Response',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
     _descriptor.FieldDescriptor(
-      name='success', full_name='communicationsapi.Response.success', index=0,
-      number=1, type=8, cpp_type=7, label=1,
+      name='exclusive', full_name='communicationsapi.PeerId.exclusive', index=1,
+      number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=112,
+  serialized_end=156,
+)
+
+
+_VOID = _descriptor.Descriptor(
+  name='Void',
+  full_name='communicationsapi.Void',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=158,
+  serialized_end=164,
+)
+
+
+_MSG = _descriptor.Descriptor(
+  name='Msg',
+  full_name='communicationsapi.Msg',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
     _descriptor.FieldDescriptor(
-      name='message', full_name='communicationsapi.Response.message', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='payload', full_name='communicationsapi.Msg.payload', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -201,8 +187,8 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=350,
-  serialized_end=394,
+  serialized_start=166,
+  serialized_end=188,
 )
 
 
@@ -216,13 +202,605 @@ _PUBLISHPAYLOAD = _descriptor.Descriptor(
   fields=[
     _descriptor.FieldDescriptor(
       name='topic', full_name='communicationsapi.PublishPayload.topic', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='communicationsapi.PublishPayload.message', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=190,
+  serialized_end=290,
+)
+
+
+_SUBSCRIBERS = _descriptor.Descriptor(
+  name='Subscribers',
+  full_name='communicationsapi.Subscribers',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peerId', full_name='communicationsapi.Subscribers.peerId', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=292,
+  serialized_end=321,
+)
+
+
+_SUBSCRIBER = _descriptor.Descriptor(
+  name='Subscriber',
+  full_name='communicationsapi.Subscriber',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peerId', full_name='communicationsapi.Subscriber.peerId', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='message', full_name='communicationsapi.PublishPayload.message', index=1,
+      name='channel', full_name='communicationsapi.Subscriber.channel', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=323,
+  serialized_end=396,
+)
+
+
+_BOOLEANRESPONSE = _descriptor.Descriptor(
+  name='BooleanResponse',
+  full_name='communicationsapi.BooleanResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='value', full_name='communicationsapi.BooleanResponse.value', index=0,
+      number=1, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=398,
+  serialized_end=430,
+)
+
+
+_NOTIFICATION = _descriptor.Descriptor(
+  name='Notification',
+  full_name='communicationsapi.Notification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peerNewMsg', full_name='communicationsapi.Notification.peerNewMsg', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='peerChannelInvite', full_name='communicationsapi.Notification.peerChannelInvite', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='peerSignatureRequest', full_name='communicationsapi.Notification.peerSignatureRequest', index=2,
+      number=3, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='channelNewData', full_name='communicationsapi.Notification.channelNewData', index=3,
+      number=4, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='channelPeerLeft', full_name='communicationsapi.Notification.channelPeerLeft', index=4,
+      number=5, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='channelPeerJoined', full_name='communicationsapi.Notification.channelPeerJoined', index=5,
+      number=6, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='serverNotification', full_name='communicationsapi.Notification.serverNotification', index=6,
+      number=7, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='notification_type', full_name='communicationsapi.Notification.notification_type',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=433,
+  serialized_end=921,
+)
+
+
+_PEERNEWMSG = _descriptor.Descriptor(
+  name='PeerNewMsg',
+  full_name='communicationsapi.PeerNewMsg',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='message', full_name='communicationsapi.PeerNewMsg.message', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='peerId', full_name='communicationsapi.PeerNewMsg.peerId', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='signature', full_name='communicationsapi.PeerNewMsg.signature', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_peerId', full_name='communicationsapi.PeerNewMsg._peerId',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_signature', full_name='communicationsapi.PeerNewMsg._signature',
+      index=1, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=923,
+  serialized_end=1046,
+)
+
+
+_PEERCHANNELINVITE = _descriptor.Descriptor(
+  name='PeerChannelInvite',
+  full_name='communicationsapi.PeerChannelInvite',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='channel', full_name='communicationsapi.PeerChannelInvite.channel', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='peerId', full_name='communicationsapi.PeerChannelInvite.peerId', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nonce', full_name='communicationsapi.PeerChannelInvite.nonce', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='signature', full_name='communicationsapi.PeerChannelInvite.signature', index=3,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_nonce', full_name='communicationsapi.PeerChannelInvite._nonce',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_signature', full_name='communicationsapi.PeerChannelInvite._signature',
+      index=1, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=1049,
+  serialized_end=1197,
+)
+
+
+_PEERSIGNATUREREQUEST = _descriptor.Descriptor(
+  name='PeerSignatureRequest',
+  full_name='communicationsapi.PeerSignatureRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='dataToSign', full_name='communicationsapi.PeerSignatureRequest.dataToSign', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='peerId', full_name='communicationsapi.PeerSignatureRequest.peerId', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nonce', full_name='communicationsapi.PeerSignatureRequest.nonce', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='signature', full_name='communicationsapi.PeerSignatureRequest.signature', index=3,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_signature', full_name='communicationsapi.PeerSignatureRequest._signature',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=1199,
+  serialized_end=1310,
+)
+
+
+_PEERSIGNATURERESPONSE = _descriptor.Descriptor(
+  name='PeerSignatureResponse',
+  full_name='communicationsapi.PeerSignatureResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='peerId', full_name='communicationsapi.PeerSignatureResponse.peerId', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='signedNonce', full_name='communicationsapi.PeerSignatureResponse.signedNonce', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='dataSignature', full_name='communicationsapi.PeerSignatureResponse.dataSignature', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='signature', full_name='communicationsapi.PeerSignatureResponse.signature', index=3,
+      number=4, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_signature', full_name='communicationsapi.PeerSignatureResponse._signature',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=1312,
+  serialized_end=1433,
+)
+
+
+_CHANNELNEWDATA = _descriptor.Descriptor(
+  name='ChannelNewData',
+  full_name='communicationsapi.ChannelNewData',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='from', full_name='communicationsapi.ChannelNewData.from', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='communicationsapi.ChannelNewData.data', index=1,
+      number=2, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='nonce', full_name='communicationsapi.ChannelNewData.nonce', index=2,
+      number=3, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='channel', full_name='communicationsapi.ChannelNewData.channel', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_from', full_name='communicationsapi.ChannelNewData._from',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+  ],
+  serialized_start=1435,
+  serialized_end=1553,
+)
+
+
+_CHANNELPEERLEFT = _descriptor.Descriptor(
+  name='ChannelPeerLeft',
+  full_name='communicationsapi.ChannelPeerLeft',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='channel', full_name='communicationsapi.ChannelPeerLeft.channel', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='peerId', full_name='communicationsapi.ChannelPeerLeft.peerId', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1555,
+  serialized_end=1633,
+)
+
+
+_CHANNELPEERJOINED = _descriptor.Descriptor(
+  name='ChannelPeerJoined',
+  full_name='communicationsapi.ChannelPeerJoined',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='channel', full_name='communicationsapi.ChannelPeerJoined.channel', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='peerId', full_name='communicationsapi.ChannelPeerJoined.peerId', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=1635,
+  serialized_end=1715,
+)
+
+
+_SERVERNOTIFICATION = _descriptor.Descriptor(
+  name='ServerNotification',
+  full_name='communicationsapi.ServerNotification',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='notification', full_name='communicationsapi.ServerNotification.notification', index=0,
+      number=1, type=12, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"",
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='payload', full_name='communicationsapi.ServerNotification.payload', index=1,
       number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
@@ -240,86 +818,85 @@ _PUBLISHPAYLOAD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=396,
-  serialized_end=444,
+  serialized_start=1717,
+  serialized_end=1776,
 )
 
-
-_PAYLOAD = _descriptor.Descriptor(
-  name='Payload',
-  full_name='communicationsapi.Payload',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='from', full_name='communicationsapi.Payload.from', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='to', full_name='communicationsapi.Payload.to', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='communicationsapi.Payload.data', index=2,
-      number=3, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='seqno', full_name='communicationsapi.Payload.seqno', index=3,
-      number=4, type=12, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"",
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='topicIDs', full_name='communicationsapi.Payload.topicIDs', index=4,
-      number=5, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-    _descriptor.OneofDescriptor(
-      name='_to', full_name='communicationsapi.Payload._to',
-      index=0, containing_type=None,
-      create_key=_descriptor._internal_create_key,
-    fields=[]),
-  ],
-  serialized_start=446,
-  serialized_end=540,
-)
-
-_NOTIFICATION.fields_by_name['type'].enum_type = _NOTIFICATION_NOTIFICATIONTYPE
-_NOTIFICATION_NOTIFICATIONTYPE.containing_type = _NOTIFICATION
-_PAYLOAD.oneofs_by_name['_to'].fields.append(
-  _PAYLOAD.fields_by_name['to'])
-_PAYLOAD.fields_by_name['to'].containing_oneof = _PAYLOAD.oneofs_by_name['_to']
+_PUBLISHPAYLOAD.fields_by_name['topic'].message_type = _CHANNEL
+_PUBLISHPAYLOAD.fields_by_name['message'].message_type = _MSG
+_SUBSCRIBER.fields_by_name['channel'].message_type = _CHANNEL
+_NOTIFICATION.fields_by_name['peerNewMsg'].message_type = _PEERNEWMSG
+_NOTIFICATION.fields_by_name['peerChannelInvite'].message_type = _PEERCHANNELINVITE
+_NOTIFICATION.fields_by_name['peerSignatureRequest'].message_type = _PEERSIGNATUREREQUEST
+_NOTIFICATION.fields_by_name['channelNewData'].message_type = _CHANNELNEWDATA
+_NOTIFICATION.fields_by_name['channelPeerLeft'].message_type = _CHANNELPEERLEFT
+_NOTIFICATION.fields_by_name['channelPeerJoined'].message_type = _CHANNELPEERJOINED
+_NOTIFICATION.fields_by_name['serverNotification'].message_type = _SERVERNOTIFICATION
+_NOTIFICATION.oneofs_by_name['notification_type'].fields.append(
+  _NOTIFICATION.fields_by_name['peerNewMsg'])
+_NOTIFICATION.fields_by_name['peerNewMsg'].containing_oneof = _NOTIFICATION.oneofs_by_name['notification_type']
+_NOTIFICATION.oneofs_by_name['notification_type'].fields.append(
+  _NOTIFICATION.fields_by_name['peerChannelInvite'])
+_NOTIFICATION.fields_by_name['peerChannelInvite'].containing_oneof = _NOTIFICATION.oneofs_by_name['notification_type']
+_NOTIFICATION.oneofs_by_name['notification_type'].fields.append(
+  _NOTIFICATION.fields_by_name['peerSignatureRequest'])
+_NOTIFICATION.fields_by_name['peerSignatureRequest'].containing_oneof = _NOTIFICATION.oneofs_by_name['notification_type']
+_NOTIFICATION.oneofs_by_name['notification_type'].fields.append(
+  _NOTIFICATION.fields_by_name['channelNewData'])
+_NOTIFICATION.fields_by_name['channelNewData'].containing_oneof = _NOTIFICATION.oneofs_by_name['notification_type']
+_NOTIFICATION.oneofs_by_name['notification_type'].fields.append(
+  _NOTIFICATION.fields_by_name['channelPeerLeft'])
+_NOTIFICATION.fields_by_name['channelPeerLeft'].containing_oneof = _NOTIFICATION.oneofs_by_name['notification_type']
+_NOTIFICATION.oneofs_by_name['notification_type'].fields.append(
+  _NOTIFICATION.fields_by_name['channelPeerJoined'])
+_NOTIFICATION.fields_by_name['channelPeerJoined'].containing_oneof = _NOTIFICATION.oneofs_by_name['notification_type']
+_NOTIFICATION.oneofs_by_name['notification_type'].fields.append(
+  _NOTIFICATION.fields_by_name['serverNotification'])
+_NOTIFICATION.fields_by_name['serverNotification'].containing_oneof = _NOTIFICATION.oneofs_by_name['notification_type']
+_PEERNEWMSG.fields_by_name['message'].message_type = _MSG
+_PEERNEWMSG.oneofs_by_name['_peerId'].fields.append(
+  _PEERNEWMSG.fields_by_name['peerId'])
+_PEERNEWMSG.fields_by_name['peerId'].containing_oneof = _PEERNEWMSG.oneofs_by_name['_peerId']
+_PEERNEWMSG.oneofs_by_name['_signature'].fields.append(
+  _PEERNEWMSG.fields_by_name['signature'])
+_PEERNEWMSG.fields_by_name['signature'].containing_oneof = _PEERNEWMSG.oneofs_by_name['_signature']
+_PEERCHANNELINVITE.fields_by_name['channel'].message_type = _CHANNEL
+_PEERCHANNELINVITE.oneofs_by_name['_nonce'].fields.append(
+  _PEERCHANNELINVITE.fields_by_name['nonce'])
+_PEERCHANNELINVITE.fields_by_name['nonce'].containing_oneof = _PEERCHANNELINVITE.oneofs_by_name['_nonce']
+_PEERCHANNELINVITE.oneofs_by_name['_signature'].fields.append(
+  _PEERCHANNELINVITE.fields_by_name['signature'])
+_PEERCHANNELINVITE.fields_by_name['signature'].containing_oneof = _PEERCHANNELINVITE.oneofs_by_name['_signature']
+_PEERSIGNATUREREQUEST.oneofs_by_name['_signature'].fields.append(
+  _PEERSIGNATUREREQUEST.fields_by_name['signature'])
+_PEERSIGNATUREREQUEST.fields_by_name['signature'].containing_oneof = _PEERSIGNATUREREQUEST.oneofs_by_name['_signature']
+_PEERSIGNATURERESPONSE.oneofs_by_name['_signature'].fields.append(
+  _PEERSIGNATURERESPONSE.fields_by_name['signature'])
+_PEERSIGNATURERESPONSE.fields_by_name['signature'].containing_oneof = _PEERSIGNATURERESPONSE.oneofs_by_name['_signature']
+_CHANNELNEWDATA.fields_by_name['channel'].message_type = _CHANNEL
+_CHANNELNEWDATA.oneofs_by_name['_from'].fields.append(
+  _CHANNELNEWDATA.fields_by_name['from'])
+_CHANNELNEWDATA.fields_by_name['from'].containing_oneof = _CHANNELNEWDATA.oneofs_by_name['_from']
+_CHANNELPEERLEFT.fields_by_name['channel'].message_type = _CHANNEL
+_CHANNELPEERJOINED.fields_by_name['channel'].message_type = _CHANNEL
 DESCRIPTOR.message_types_by_name['Channel'] = _CHANNEL
-DESCRIPTOR.message_types_by_name['NoParams'] = _NOPARAMS
-DESCRIPTOR.message_types_by_name['Notification'] = _NOTIFICATION
-DESCRIPTOR.message_types_by_name['Response'] = _RESPONSE
+DESCRIPTOR.message_types_by_name['RskAddress'] = _RSKADDRESS
+DESCRIPTOR.message_types_by_name['PeerId'] = _PEERID
+DESCRIPTOR.message_types_by_name['Void'] = _VOID
+DESCRIPTOR.message_types_by_name['Msg'] = _MSG
 DESCRIPTOR.message_types_by_name['PublishPayload'] = _PUBLISHPAYLOAD
-DESCRIPTOR.message_types_by_name['Payload'] = _PAYLOAD
+DESCRIPTOR.message_types_by_name['Subscribers'] = _SUBSCRIBERS
+DESCRIPTOR.message_types_by_name['Subscriber'] = _SUBSCRIBER
+DESCRIPTOR.message_types_by_name['BooleanResponse'] = _BOOLEANRESPONSE
+DESCRIPTOR.message_types_by_name['Notification'] = _NOTIFICATION
+DESCRIPTOR.message_types_by_name['PeerNewMsg'] = _PEERNEWMSG
+DESCRIPTOR.message_types_by_name['PeerChannelInvite'] = _PEERCHANNELINVITE
+DESCRIPTOR.message_types_by_name['PeerSignatureRequest'] = _PEERSIGNATUREREQUEST
+DESCRIPTOR.message_types_by_name['PeerSignatureResponse'] = _PEERSIGNATURERESPONSE
+DESCRIPTOR.message_types_by_name['ChannelNewData'] = _CHANNELNEWDATA
+DESCRIPTOR.message_types_by_name['ChannelPeerLeft'] = _CHANNELPEERLEFT
+DESCRIPTOR.message_types_by_name['ChannelPeerJoined'] = _CHANNELPEERJOINED
+DESCRIPTOR.message_types_by_name['ServerNotification'] = _SERVERNOTIFICATION
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 Channel = _reflection.GeneratedProtocolMessageType('Channel', (_message.Message,), {
@@ -329,26 +906,33 @@ Channel = _reflection.GeneratedProtocolMessageType('Channel', (_message.Message,
   })
 _sym_db.RegisterMessage(Channel)
 
-NoParams = _reflection.GeneratedProtocolMessageType('NoParams', (_message.Message,), {
-  'DESCRIPTOR' : _NOPARAMS,
+RskAddress = _reflection.GeneratedProtocolMessageType('RskAddress', (_message.Message,), {
+  'DESCRIPTOR' : _RSKADDRESS,
   '__module__' : 'api_pb2'
-  # @@protoc_insertion_point(class_scope:communicationsapi.NoParams)
+  # @@protoc_insertion_point(class_scope:communicationsapi.RskAddress)
   })
-_sym_db.RegisterMessage(NoParams)
+_sym_db.RegisterMessage(RskAddress)
 
-Notification = _reflection.GeneratedProtocolMessageType('Notification', (_message.Message,), {
-  'DESCRIPTOR' : _NOTIFICATION,
+PeerId = _reflection.GeneratedProtocolMessageType('PeerId', (_message.Message,), {
+  'DESCRIPTOR' : _PEERID,
   '__module__' : 'api_pb2'
-  # @@protoc_insertion_point(class_scope:communicationsapi.Notification)
+  # @@protoc_insertion_point(class_scope:communicationsapi.PeerId)
   })
-_sym_db.RegisterMessage(Notification)
+_sym_db.RegisterMessage(PeerId)
 
-Response = _reflection.GeneratedProtocolMessageType('Response', (_message.Message,), {
-  'DESCRIPTOR' : _RESPONSE,
+Void = _reflection.GeneratedProtocolMessageType('Void', (_message.Message,), {
+  'DESCRIPTOR' : _VOID,
   '__module__' : 'api_pb2'
-  # @@protoc_insertion_point(class_scope:communicationsapi.Response)
+  # @@protoc_insertion_point(class_scope:communicationsapi.Void)
   })
-_sym_db.RegisterMessage(Response)
+_sym_db.RegisterMessage(Void)
+
+Msg = _reflection.GeneratedProtocolMessageType('Msg', (_message.Message,), {
+  'DESCRIPTOR' : _MSG,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.Msg)
+  })
+_sym_db.RegisterMessage(Msg)
 
 PublishPayload = _reflection.GeneratedProtocolMessageType('PublishPayload', (_message.Message,), {
   'DESCRIPTOR' : _PUBLISHPAYLOAD,
@@ -357,12 +941,89 @@ PublishPayload = _reflection.GeneratedProtocolMessageType('PublishPayload', (_me
   })
 _sym_db.RegisterMessage(PublishPayload)
 
-Payload = _reflection.GeneratedProtocolMessageType('Payload', (_message.Message,), {
-  'DESCRIPTOR' : _PAYLOAD,
+Subscribers = _reflection.GeneratedProtocolMessageType('Subscribers', (_message.Message,), {
+  'DESCRIPTOR' : _SUBSCRIBERS,
   '__module__' : 'api_pb2'
-  # @@protoc_insertion_point(class_scope:communicationsapi.Payload)
+  # @@protoc_insertion_point(class_scope:communicationsapi.Subscribers)
   })
-_sym_db.RegisterMessage(Payload)
+_sym_db.RegisterMessage(Subscribers)
+
+Subscriber = _reflection.GeneratedProtocolMessageType('Subscriber', (_message.Message,), {
+  'DESCRIPTOR' : _SUBSCRIBER,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.Subscriber)
+  })
+_sym_db.RegisterMessage(Subscriber)
+
+BooleanResponse = _reflection.GeneratedProtocolMessageType('BooleanResponse', (_message.Message,), {
+  'DESCRIPTOR' : _BOOLEANRESPONSE,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.BooleanResponse)
+  })
+_sym_db.RegisterMessage(BooleanResponse)
+
+Notification = _reflection.GeneratedProtocolMessageType('Notification', (_message.Message,), {
+  'DESCRIPTOR' : _NOTIFICATION,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.Notification)
+  })
+_sym_db.RegisterMessage(Notification)
+
+PeerNewMsg = _reflection.GeneratedProtocolMessageType('PeerNewMsg', (_message.Message,), {
+  'DESCRIPTOR' : _PEERNEWMSG,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.PeerNewMsg)
+  })
+_sym_db.RegisterMessage(PeerNewMsg)
+
+PeerChannelInvite = _reflection.GeneratedProtocolMessageType('PeerChannelInvite', (_message.Message,), {
+  'DESCRIPTOR' : _PEERCHANNELINVITE,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.PeerChannelInvite)
+  })
+_sym_db.RegisterMessage(PeerChannelInvite)
+
+PeerSignatureRequest = _reflection.GeneratedProtocolMessageType('PeerSignatureRequest', (_message.Message,), {
+  'DESCRIPTOR' : _PEERSIGNATUREREQUEST,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.PeerSignatureRequest)
+  })
+_sym_db.RegisterMessage(PeerSignatureRequest)
+
+PeerSignatureResponse = _reflection.GeneratedProtocolMessageType('PeerSignatureResponse', (_message.Message,), {
+  'DESCRIPTOR' : _PEERSIGNATURERESPONSE,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.PeerSignatureResponse)
+  })
+_sym_db.RegisterMessage(PeerSignatureResponse)
+
+ChannelNewData = _reflection.GeneratedProtocolMessageType('ChannelNewData', (_message.Message,), {
+  'DESCRIPTOR' : _CHANNELNEWDATA,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.ChannelNewData)
+  })
+_sym_db.RegisterMessage(ChannelNewData)
+
+ChannelPeerLeft = _reflection.GeneratedProtocolMessageType('ChannelPeerLeft', (_message.Message,), {
+  'DESCRIPTOR' : _CHANNELPEERLEFT,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.ChannelPeerLeft)
+  })
+_sym_db.RegisterMessage(ChannelPeerLeft)
+
+ChannelPeerJoined = _reflection.GeneratedProtocolMessageType('ChannelPeerJoined', (_message.Message,), {
+  'DESCRIPTOR' : _CHANNELPEERJOINED,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.ChannelPeerJoined)
+  })
+_sym_db.RegisterMessage(ChannelPeerJoined)
+
+ServerNotification = _reflection.GeneratedProtocolMessageType('ServerNotification', (_message.Message,), {
+  'DESCRIPTOR' : _SERVERNOTIFICATION,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.ServerNotification)
+  })
+_sym_db.RegisterMessage(ServerNotification)
 
 
 
@@ -373,25 +1034,15 @@ _COMMUNICATIONSAPI = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=543,
-  serialized_end=953,
+  serialized_start=1779,
+  serialized_end=2874,
   methods=[
-  _descriptor.MethodDescriptor(
-    name='PingChannel',
-    full_name='communicationsapi.CommunicationsApi.PingChannel',
-    index=0,
-    containing_service=None,
-    input_type=_NOPARAMS,
-    output_type=_RESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
   _descriptor.MethodDescriptor(
     name='ConnectToCommunicationsNode',
     full_name='communicationsapi.CommunicationsApi.ConnectToCommunicationsNode',
-    index=1,
+    index=0,
     containing_service=None,
-    input_type=_NOPARAMS,
+    input_type=_RSKADDRESS,
     output_type=_NOTIFICATION,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
@@ -399,30 +1050,130 @@ _COMMUNICATIONSAPI = _descriptor.ServiceDescriptor(
   _descriptor.MethodDescriptor(
     name='EndCommunication',
     full_name='communicationsapi.CommunicationsApi.EndCommunication',
-    index=2,
+    index=1,
     containing_service=None,
-    input_type=_NOPARAMS,
-    output_type=_RESPONSE,
+    input_type=_VOID,
+    output_type=_VOID,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
     name='Publish',
     full_name='communicationsapi.CommunicationsApi.Publish',
-    index=3,
+    index=2,
     containing_service=None,
     input_type=_PUBLISHPAYLOAD,
-    output_type=_RESPONSE,
+    output_type=_VOID,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
     name='Subscribe',
     full_name='communicationsapi.CommunicationsApi.Subscribe',
+    index=3,
+    containing_service=None,
+    input_type=_CHANNEL,
+    output_type=_VOID,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Unsubscribe',
+    full_name='communicationsapi.CommunicationsApi.Unsubscribe',
     index=4,
     containing_service=None,
     input_type=_CHANNEL,
-    output_type=_RESPONSE,
+    output_type=_VOID,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='GetSubscribers',
+    full_name='communicationsapi.CommunicationsApi.GetSubscribers',
+    index=5,
+    containing_service=None,
+    input_type=_CHANNEL,
+    output_type=_SUBSCRIBERS,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='HasSubscriber',
+    full_name='communicationsapi.CommunicationsApi.HasSubscriber',
+    index=6,
+    containing_service=None,
+    input_type=_SUBSCRIBER,
+    output_type=_BOOLEANRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SendMessage',
+    full_name='communicationsapi.CommunicationsApi.SendMessage',
+    index=7,
+    containing_service=None,
+    input_type=_MSG,
+    output_type=_VOID,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='LocatePeerId',
+    full_name='communicationsapi.CommunicationsApi.LocatePeerId',
+    index=8,
+    containing_service=None,
+    input_type=_RSKADDRESS,
+    output_type=_PEERID,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateTopicWithPeerId',
+    full_name='communicationsapi.CommunicationsApi.CreateTopicWithPeerId',
+    index=9,
+    containing_service=None,
+    input_type=_PEERID,
+    output_type=_NOTIFICATION,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CreateTopicWithRskAddress',
+    full_name='communicationsapi.CommunicationsApi.CreateTopicWithRskAddress',
+    index=10,
+    containing_service=None,
+    input_type=_RSKADDRESS,
+    output_type=_NOTIFICATION,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='CloseTopic',
+    full_name='communicationsapi.CommunicationsApi.CloseTopic',
+    index=11,
+    containing_service=None,
+    input_type=_CHANNEL,
+    output_type=_VOID,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='SendMessageToTopic',
+    full_name='communicationsapi.CommunicationsApi.SendMessageToTopic',
+    index=12,
+    containing_service=None,
+    input_type=_PUBLISHPAYLOAD,
+    output_type=_VOID,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='UpdateAddress',
+    full_name='communicationsapi.CommunicationsApi.UpdateAddress',
+    index=13,
+    containing_service=None,
+    input_type=_RSKADDRESS,
+    output_type=_VOID,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),

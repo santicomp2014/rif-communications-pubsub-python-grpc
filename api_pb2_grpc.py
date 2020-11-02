@@ -6,10 +6,8 @@ import api_pb2 as api__pb2
 
 
 class CommunicationsApiStub(object):
-    """subscribe(topic: string, onMessage: (message: Buffer) => void): void
-    unsubscribe(topic: string, onMessage: (message: Buffer) => void): void
-    publish(topic: string, message: Buffer): Promise<void>
-    getSubscribers(topic: string): Promise<[]>
+    """Server side stream, there's no need for a bidirectional stream, it's only needed so
+    The client can be notified of events in their subscriptions
     """
 
     def __init__(self, channel):
@@ -18,69 +16,177 @@ class CommunicationsApiStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.PingChannel = channel.unary_unary(
-                '/communicationsapi.CommunicationsApi/PingChannel',
-                request_serializer=api__pb2.NoParams.SerializeToString,
-                response_deserializer=api__pb2.Response.FromString,
-                )
         self.ConnectToCommunicationsNode = channel.unary_stream(
                 '/communicationsapi.CommunicationsApi/ConnectToCommunicationsNode',
-                request_serializer=api__pb2.NoParams.SerializeToString,
+                request_serializer=api__pb2.RskAddress.SerializeToString,
                 response_deserializer=api__pb2.Notification.FromString,
                 )
         self.EndCommunication = channel.unary_unary(
                 '/communicationsapi.CommunicationsApi/EndCommunication',
-                request_serializer=api__pb2.NoParams.SerializeToString,
-                response_deserializer=api__pb2.Response.FromString,
+                request_serializer=api__pb2.Void.SerializeToString,
+                response_deserializer=api__pb2.Void.FromString,
                 )
         self.Publish = channel.unary_unary(
                 '/communicationsapi.CommunicationsApi/Publish',
                 request_serializer=api__pb2.PublishPayload.SerializeToString,
-                response_deserializer=api__pb2.Response.FromString,
+                response_deserializer=api__pb2.Void.FromString,
                 )
         self.Subscribe = channel.unary_unary(
                 '/communicationsapi.CommunicationsApi/Subscribe',
                 request_serializer=api__pb2.Channel.SerializeToString,
-                response_deserializer=api__pb2.Response.FromString,
+                response_deserializer=api__pb2.Void.FromString,
+                )
+        self.Unsubscribe = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/Unsubscribe',
+                request_serializer=api__pb2.Channel.SerializeToString,
+                response_deserializer=api__pb2.Void.FromString,
+                )
+        self.GetSubscribers = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/GetSubscribers',
+                request_serializer=api__pb2.Channel.SerializeToString,
+                response_deserializer=api__pb2.Subscribers.FromString,
+                )
+        self.HasSubscriber = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/HasSubscriber',
+                request_serializer=api__pb2.Subscriber.SerializeToString,
+                response_deserializer=api__pb2.BooleanResponse.FromString,
+                )
+        self.SendMessage = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/SendMessage',
+                request_serializer=api__pb2.Msg.SerializeToString,
+                response_deserializer=api__pb2.Void.FromString,
+                )
+        self.LocatePeerId = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/LocatePeerId',
+                request_serializer=api__pb2.RskAddress.SerializeToString,
+                response_deserializer=api__pb2.PeerId.FromString,
+                )
+        self.CreateTopicWithPeerId = channel.unary_stream(
+                '/communicationsapi.CommunicationsApi/CreateTopicWithPeerId',
+                request_serializer=api__pb2.PeerId.SerializeToString,
+                response_deserializer=api__pb2.Notification.FromString,
+                )
+        self.CreateTopicWithRskAddress = channel.unary_stream(
+                '/communicationsapi.CommunicationsApi/CreateTopicWithRskAddress',
+                request_serializer=api__pb2.RskAddress.SerializeToString,
+                response_deserializer=api__pb2.Notification.FromString,
+                )
+        self.CloseTopic = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/CloseTopic',
+                request_serializer=api__pb2.Channel.SerializeToString,
+                response_deserializer=api__pb2.Void.FromString,
+                )
+        self.SendMessageToTopic = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/SendMessageToTopic',
+                request_serializer=api__pb2.PublishPayload.SerializeToString,
+                response_deserializer=api__pb2.Void.FromString,
+                )
+        self.UpdateAddress = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/UpdateAddress',
+                request_serializer=api__pb2.RskAddress.SerializeToString,
+                response_deserializer=api__pb2.Void.FromString,
                 )
 
 
 class CommunicationsApiServicer(object):
-    """subscribe(topic: string, onMessage: (message: Buffer) => void): void
-    unsubscribe(topic: string, onMessage: (message: Buffer) => void): void
-    publish(topic: string, message: Buffer): Promise<void>
-    getSubscribers(topic: string): Promise<[]>
+    """Server side stream, there's no need for a bidirectional stream, it's only needed so
+    The client can be notified of events in their subscriptions
     """
 
-    def PingChannel(self, request, context):
-        """Server side stream, there's no need for a bidirectional stream, it's only needed so
-        The client can be notified of events in their subscriptions
+    def ConnectToCommunicationsNode(self, request, context):
+        """Open a data stream with the server, it can only receive messages
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def ConnectToCommunicationsNode(self, request, context):
-        """Missing associated documentation comment in .proto file."""
-        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
-        context.set_details('Method not implemented!')
-        raise NotImplementedError('Method not implemented!')
-
     def EndCommunication(self, request, context):
-        """Missing associated documentation comment in .proto file."""
+        """Close the data stream
+        """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Publish(self, request, context):
-        """rpc CreateChannel (Channel) returns (Response);
+        """Publish a message in a channel
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
     def Subscribe(self, request, context):
-        """rpc Unsubscribe (Channel) returns (Response);
+        """Subscribe to a channel
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Unsubscribe(self, request, context):
+        """Unsubscribe to a channel
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def GetSubscribers(self, request, context):
+        """Get the subscribers of a participating channel
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def HasSubscriber(self, request, context):
+        """Query if a subscriber exists in a participating channel
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SendMessage(self, request, context):
+        """Send a direct message to a peer
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def LocatePeerId(self, request, context):
+        """///LUMINO SPECIFIC COMMANDS
+
+        Obtains peerId from RSKAddress
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateTopicWithPeerId(self, request, context):
+        """Creates topic for specific peerID/Rsk Address
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CreateTopicWithRskAddress(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def CloseTopic(self, request, context):
+        """Close Topic for a specific topicID
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def SendMessageToTopic(self, request, context):
+        """Send Message to Specified Topic
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def UpdateAddress(self, request, context):
+        """Update RSK Address after invitation
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -89,30 +195,75 @@ class CommunicationsApiServicer(object):
 
 def add_CommunicationsApiServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'PingChannel': grpc.unary_unary_rpc_method_handler(
-                    servicer.PingChannel,
-                    request_deserializer=api__pb2.NoParams.FromString,
-                    response_serializer=api__pb2.Response.SerializeToString,
-            ),
             'ConnectToCommunicationsNode': grpc.unary_stream_rpc_method_handler(
                     servicer.ConnectToCommunicationsNode,
-                    request_deserializer=api__pb2.NoParams.FromString,
+                    request_deserializer=api__pb2.RskAddress.FromString,
                     response_serializer=api__pb2.Notification.SerializeToString,
             ),
             'EndCommunication': grpc.unary_unary_rpc_method_handler(
                     servicer.EndCommunication,
-                    request_deserializer=api__pb2.NoParams.FromString,
-                    response_serializer=api__pb2.Response.SerializeToString,
+                    request_deserializer=api__pb2.Void.FromString,
+                    response_serializer=api__pb2.Void.SerializeToString,
             ),
             'Publish': grpc.unary_unary_rpc_method_handler(
                     servicer.Publish,
                     request_deserializer=api__pb2.PublishPayload.FromString,
-                    response_serializer=api__pb2.Response.SerializeToString,
+                    response_serializer=api__pb2.Void.SerializeToString,
             ),
             'Subscribe': grpc.unary_unary_rpc_method_handler(
                     servicer.Subscribe,
                     request_deserializer=api__pb2.Channel.FromString,
-                    response_serializer=api__pb2.Response.SerializeToString,
+                    response_serializer=api__pb2.Void.SerializeToString,
+            ),
+            'Unsubscribe': grpc.unary_unary_rpc_method_handler(
+                    servicer.Unsubscribe,
+                    request_deserializer=api__pb2.Channel.FromString,
+                    response_serializer=api__pb2.Void.SerializeToString,
+            ),
+            'GetSubscribers': grpc.unary_unary_rpc_method_handler(
+                    servicer.GetSubscribers,
+                    request_deserializer=api__pb2.Channel.FromString,
+                    response_serializer=api__pb2.Subscribers.SerializeToString,
+            ),
+            'HasSubscriber': grpc.unary_unary_rpc_method_handler(
+                    servicer.HasSubscriber,
+                    request_deserializer=api__pb2.Subscriber.FromString,
+                    response_serializer=api__pb2.BooleanResponse.SerializeToString,
+            ),
+            'SendMessage': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendMessage,
+                    request_deserializer=api__pb2.Msg.FromString,
+                    response_serializer=api__pb2.Void.SerializeToString,
+            ),
+            'LocatePeerId': grpc.unary_unary_rpc_method_handler(
+                    servicer.LocatePeerId,
+                    request_deserializer=api__pb2.RskAddress.FromString,
+                    response_serializer=api__pb2.PeerId.SerializeToString,
+            ),
+            'CreateTopicWithPeerId': grpc.unary_stream_rpc_method_handler(
+                    servicer.CreateTopicWithPeerId,
+                    request_deserializer=api__pb2.PeerId.FromString,
+                    response_serializer=api__pb2.Notification.SerializeToString,
+            ),
+            'CreateTopicWithRskAddress': grpc.unary_stream_rpc_method_handler(
+                    servicer.CreateTopicWithRskAddress,
+                    request_deserializer=api__pb2.RskAddress.FromString,
+                    response_serializer=api__pb2.Notification.SerializeToString,
+            ),
+            'CloseTopic': grpc.unary_unary_rpc_method_handler(
+                    servicer.CloseTopic,
+                    request_deserializer=api__pb2.Channel.FromString,
+                    response_serializer=api__pb2.Void.SerializeToString,
+            ),
+            'SendMessageToTopic': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendMessageToTopic,
+                    request_deserializer=api__pb2.PublishPayload.FromString,
+                    response_serializer=api__pb2.Void.SerializeToString,
+            ),
+            'UpdateAddress': grpc.unary_unary_rpc_method_handler(
+                    servicer.UpdateAddress,
+                    request_deserializer=api__pb2.RskAddress.FromString,
+                    response_serializer=api__pb2.Void.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
@@ -122,28 +273,9 @@ def add_CommunicationsApiServicer_to_server(servicer, server):
 
  # This class is part of an EXPERIMENTAL API.
 class CommunicationsApi(object):
-    """subscribe(topic: string, onMessage: (message: Buffer) => void): void
-    unsubscribe(topic: string, onMessage: (message: Buffer) => void): void
-    publish(topic: string, message: Buffer): Promise<void>
-    getSubscribers(topic: string): Promise<[]>
+    """Server side stream, there's no need for a bidirectional stream, it's only needed so
+    The client can be notified of events in their subscriptions
     """
-
-    @staticmethod
-    def PingChannel(request,
-            target,
-            options=(),
-            channel_credentials=None,
-            call_credentials=None,
-            insecure=False,
-            compression=None,
-            wait_for_ready=None,
-            timeout=None,
-            metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/PingChannel',
-            api__pb2.NoParams.SerializeToString,
-            api__pb2.Response.FromString,
-            options, channel_credentials,
-            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def ConnectToCommunicationsNode(request,
@@ -157,7 +289,7 @@ class CommunicationsApi(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_stream(request, target, '/communicationsapi.CommunicationsApi/ConnectToCommunicationsNode',
-            api__pb2.NoParams.SerializeToString,
+            api__pb2.RskAddress.SerializeToString,
             api__pb2.Notification.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
@@ -174,8 +306,8 @@ class CommunicationsApi(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/EndCommunication',
-            api__pb2.NoParams.SerializeToString,
-            api__pb2.Response.FromString,
+            api__pb2.Void.SerializeToString,
+            api__pb2.Void.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -192,7 +324,7 @@ class CommunicationsApi(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/Publish',
             api__pb2.PublishPayload.SerializeToString,
-            api__pb2.Response.FromString,
+            api__pb2.Void.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
@@ -209,6 +341,176 @@ class CommunicationsApi(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/Subscribe',
             api__pb2.Channel.SerializeToString,
-            api__pb2.Response.FromString,
+            api__pb2.Void.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def Unsubscribe(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/Unsubscribe',
+            api__pb2.Channel.SerializeToString,
+            api__pb2.Void.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def GetSubscribers(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/GetSubscribers',
+            api__pb2.Channel.SerializeToString,
+            api__pb2.Subscribers.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def HasSubscriber(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/HasSubscriber',
+            api__pb2.Subscriber.SerializeToString,
+            api__pb2.BooleanResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SendMessage(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/SendMessage',
+            api__pb2.Msg.SerializeToString,
+            api__pb2.Void.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def LocatePeerId(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/LocatePeerId',
+            api__pb2.RskAddress.SerializeToString,
+            api__pb2.PeerId.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateTopicWithPeerId(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/communicationsapi.CommunicationsApi/CreateTopicWithPeerId',
+            api__pb2.PeerId.SerializeToString,
+            api__pb2.Notification.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CreateTopicWithRskAddress(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_stream(request, target, '/communicationsapi.CommunicationsApi/CreateTopicWithRskAddress',
+            api__pb2.RskAddress.SerializeToString,
+            api__pb2.Notification.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def CloseTopic(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/CloseTopic',
+            api__pb2.Channel.SerializeToString,
+            api__pb2.Void.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SendMessageToTopic(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/SendMessageToTopic',
+            api__pb2.PublishPayload.SerializeToString,
+            api__pb2.Void.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def UpdateAddress(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/UpdateAddress',
+            api__pb2.RskAddress.SerializeToString,
+            api__pb2.Void.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
