@@ -1,12 +1,25 @@
 # Rif Comms Pubsub Test with Python
 
-This repo is for testing a GRPC connection between a python client and riff comm node
+This repo is for testing a GRPC connection between a python client and riff comm node.
 
-Install dependencies
-- `pip install -r ./requirements.txt`
+### 1. Create virtual environment
+```shell script
+virtualenv -p <PATH_TO_PYTHON3> venv
+```
 
-Activate source env
-- `source venv/bin/activate`
+your python 3 path can be found by executing `which python3`. 
 
-Run Client Test
-- `python3 client2.py`
+### 2. Activate virtual environment
+```shell script
+source venv/bin/activate
+```
+
+### 3. Install dependencies
+```shell script
+pip install -r requirements.txt
+```
+
+### 4. Execute tests
+```shell script
+python3 client2.py
+```
