@@ -20,7 +20,7 @@ pip install -r requirements.txt
 ```
 
 ### 4. Execute tests
-for example, for the `client2.py` test, execute:
+for example, for the `client-2.py` test, execute:
 ```shell script
 python3 client-2.py
 ```
