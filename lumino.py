@@ -1,13 +1,13 @@
 import sys
 
-import grpc
+from grpc import insecure_channel
 
 from api_pb2 import RskAddress, Msg, PublishPayload, Channel
 from api_pb2_grpc import CommunicationsApiStub
 
 
 def run(target, address, channel_id):
-    with grpc.insecure_channel(target) as channel:
+    with insecure_channel(target) as channel:
         stub = CommunicationsApiStub(channel)
         rsk_address = RskAddress(address=address)
         # time.sleep(10.0)
@@ -55,11 +55,11 @@ if __name__ == "__main__":
 #     "lumino-1" : {
 #         "target": "localhost:6012",
 #         "address": "0x2aCc95758f8b5F583470bA265Eb685a8f45fC9D5",
-#         "channel-id": "16Uiu2HAm7WTnfH5GLtFVTPMc79Qu8TzMoEKe4QEDnWiSBRjr8UZf",
+#         "channel_id": "16Uiu2HAm7WTnfH5GLtFVTPMc79Qu8TzMoEKe4QEDnWiSBRjr8UZf",
 #     },
 #     "lumino-2" :{
 #         "target": "localhost:6013",
 #         "address": "0x3aCc95758f8b5F583470bA265Eb685a8f45fC9D5",
-#         "channel-id": "16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX",
+#         "channel_id": "16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX",
 #     }
 # }
