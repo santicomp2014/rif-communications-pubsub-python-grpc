@@ -35,7 +35,7 @@ def run(rif_comms_address, topic_id):
         while True:
             try:
                 print("creating topic with id", topic_id)
-                topic = stub.CreateTopicWithPeerId(topic_id)
+                topic = stub.CreateTopicWithPeerId(topic_id)  # this is failing
 
                 print("listening on topic", topic_id)
                 for response in topic:
