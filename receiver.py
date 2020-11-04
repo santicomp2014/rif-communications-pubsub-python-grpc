@@ -13,7 +13,7 @@ def run(rif_comms_address, rsk_addr_to_use):
 
         rsk_addr = RskAddress(address=rsk_addr_to_use)
         print("registering rsk address", rsk_addr.address)
-        stub.ConnectToCommunicationsNode(rsk_addr)
+        notification = stub.ConnectToCommunicationsNode(rsk_addr)  # what is this for? (also: ignored returned value)
 
         while True:
             try:
@@ -22,7 +22,7 @@ def run(rif_comms_address, rsk_addr_to_use):
 
                 print("creating topic for rsk address", rsk_addr.address)
                 topic = stub.CreateTopicWithRskAddress(rsk_addr)
-                topic_id = peer_id
+                topic_id = peer_id  # how to get topic id from topic var?
 
                 print("awaiting responses for topic", topic_id)
                 for response in topic:
@@ -40,7 +40,6 @@ def run(rif_comms_address, rsk_addr_to_use):
 
                 print("unsubscribing from topic", topic_id)
                 stub.CloseTopic(Channel(channelId=topic_id))
-                exit()
 
 
 if __name__ == "__main__":
