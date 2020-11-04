@@ -1,53 +1,56 @@
-import grpc
+import sys
+
+from grpc import insecure_channel
 from pynput.keyboard import Key, Listener
 
-import api_pb2_grpc
+from api_pb2 import Channel, PublishPayload, Msg
+from api_pb2_grpc import CommunicationsApiStub
 
 
-def run():
-    with grpc.insecure_channel("localhost:6012") as channel:
-        stub = api_pb2_grpc.CommunicationsApiStub(channel)
+def run(target, channel_id_1, channel_id_2):
+    with insecure_channel(target) as channel:
+        stub = CommunicationsApiStub(channel)
         # time.sleep(10.0)
-        # notification = stub.ConnectToCommunicationsNode(api_pb2_grpc.api__pb2.RskAddress(address="0x2aCc95758f8b5F583470bA265Eb685a8f45fC9D5"))
-        # stub.CreateTopicWithPeerId(api_pb2_grpc.api__pb2.PeerId(address="16Uiu2HAm7WTnfH5GLtFVTPMc79Qu8TzMoEKe4QEDnWiSBRjr8UZf"))
-        # stub.CreateTopicWithPeerId(api_pb2_grpc.api__pb2.PeerId(address="16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX"))
-        stub.Subscribe(api_pb2_grpc.api__pb2.Channel(channelId="16Uiu2HAm7WTnfH5GLtFVTPMc79Qu8TzMoEKe4QEDnWiSBRjr8UZf"))
-        stub.Subscribe(api_pb2_grpc.api__pb2.Channel(channelId="16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX"))
+        # notification = stub.ConnectToCommunicationsNode(RskAddress(address=address))
+        # stub.CreateTopicWithPeerId(PeerId(address=channel_id_1))
+        # stub.CreateTopicWithPeerId(PeerId(address=channel_id_2))
+        stub.Subscribe(Channel(channelId=channel_id_1))
+        stub.Subscribe(Channel(channelId=channel_id_2))
 
         def on_release(key):
             if key == Key.space:
-                stub.SendMessageToTopic(api_pb2_grpc.api__pb2.PublishPayload(topic=api_pb2_grpc.api__pb2.Channel(
-                    channelId="16Uiu2HAm7WTnfH5GLtFVTPMc79Qu8TzMoEKe4QEDnWiSBRjr8UZf"),
-                    message=api_pb2_grpc.api__pb2.Msg(payload=str.encode("HELLO")))
-                )
+                stub.SendMessageToTopic(PublishPayload(
+                    topic=Channel(channelId=channel_id_1),
+                    message=Msg(payload=str.encode("HELLO"))
+                ))
                 print("SPACE")
             if key == Key.enter:
-                stub.SendMessageToTopic(api_pb2_grpc.api__pb2.PublishPayload(topic=api_pb2_grpc.api__pb2.Channel(
-                    channelId="16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX"),
-                    message=api_pb2_grpc.api__pb2.Msg(payload=str.encode("HELLO")))
-                )
+                stub.SendMessageToTopic(PublishPayload(
+                    topic=Channel(channelId=channel_id_2),
+                    message=Msg(payload=str.encode("HELLO"))
+                ))
                 print("ENTER")
             if key == Key.esc:
                 # Stop listener
                 return False
 
         # Collect events until released
-        with Listener(
-                on_release=on_release) as listener:
+        with Listener(on_release=on_release) as listener:
             listener.join()
 
         while True:
             try:
-                # response = stub.Publish(api_pb2_grpc.api__pb2.PublishPayload(topic="0xtestroom2", message=str.encode("HELLO")))
+                # response = stub.Publish(PublishPayload(topic="0xtestroom2", message=str.encode("HELLO")))
                 # time.sleep(10.0)
                 # print("LocatePeerId")
-                # response = stub.LocatePeerId(api_pb2_grpc.api__pb2.RskAddress(address="0x2aCc95758f8b5F583470bA265Eb685a8f45fC9D5"))
+                # response = stub.LocatePeerId(RskAddress(address=address))
                 # print("response=%s" %
                 # (response))
 
-                # channel = stub.CreateTopicWithPeerId(api_pb2_grpc.api__pb2.PeerId(address="16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX"))
+                # channel = stub.CreateTopicWithPeerId(PeerId(address=channel_id_2))
                 # print("CreateTopicWithRskAddress")
-                # channel = stub.CreateTopicWithRskAddress(api_pb2_grpc.api__pb2.RskAddress(address="0x2aCc95758f8b5F583470bA265Eb685a8f45fC9D5"))
+                # channel = stub.CreateTopicWithRskAddress(RskAddress(address=address))
+
                 for resp in channel:
                     print(resp)
                 exit()
@@ -55,7 +58,7 @@ def run():
                 print("KeyboardInterrupt")
                 channel.unsubscribe(close)
                 print("CloseTopic")
-                # stub.CloseTopic(api_pb2_grpc.api__pb2.Channel(channelId="16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX"))
+                # stub.CloseTopic(Channel(channelId=channel_id_2))
                 exit()
 
 
@@ -64,4 +67,21 @@ def close(channel):
 
 
 if __name__ == "__main__":
-    run()
+    cli_target = sys.argv[1]
+    cli_channel_id_1 = sys.argv[2]
+    cli_channel_id_2 = sys.argv[3]
+    run(cli_target, cli_channel_id_1, cli_channel_id_2)
+
+# previously hard-coded values:
+# {
+#     "lumino-1-send" : {
+#         "target": "localhost:6012",
+#         "channel_id_1": "16Uiu2HAm7WTnfH5GLtFVTPMc79Qu8TzMoEKe4QEDnWiSBRjr8UZf",
+#         "channel_id_2": "16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX",
+#     },
+#     "lumino-2-send" :{
+#         "target": "localhost:6013",
+#         "channel_id_1": "16Uiu2HAmJgg1YDeeNKxY2PJ11LCWx56spjfEJdhvD5HvSCjyszaX",
+#         "channel_id_2": "16Uiu2HAm7WTnfH5GLtFVTPMc79Qu8TzMoEKe4QEDnWiSBRjr8UZf",
+#     }
+# }
