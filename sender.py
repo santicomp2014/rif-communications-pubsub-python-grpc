@@ -3,7 +3,7 @@ import sys
 from grpc import insecure_channel
 from pynput.keyboard import Key, Listener
 
-from api_pb2 import Channel, PublishPayload, Msg, RskAddress
+from api_pb2 import Channel, PublishPayload, Msg
 from api_pb2_grpc import CommunicationsApiStub
 
 
@@ -15,7 +15,7 @@ def run(rif_comms_address, topic_id):
         print("topic id for destination is", topic_id)
         stub.Subscribe(Channel(channelId=topic_id))  # this crashes if already subscribed
 
-        print("press space to send a message or escape to exit")
+        print("press space to send a message or escape to stop")
 
         def on_release(key):
             if key == Key.space:
@@ -31,6 +31,22 @@ def run(rif_comms_address, topic_id):
         # collect events until released
         with Listener(on_release=on_release) as listener:
             listener.join()
+
+        while True:
+            try:
+                print("creating topic with id", topic_id)
+                topic = stub.CreateTopicWithPeerId(topic_id)
+
+                print("listening on topic", topic_id)
+                for response in topic:
+                    print("got response %s for topic %s" % (response, topic_id))
+
+            except KeyboardInterrupt:
+                print("halting")
+
+                print("unsubscribing from topic", topic_id)
+                stub.CloseTopic(Channel(channelId=topic_id))
+                exit()
 
 
 if __name__ == "__main__":

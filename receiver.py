@@ -24,7 +24,7 @@ def run(rif_comms_address, rsk_addr_to_use):
                 topic = stub.CreateTopicWithRskAddress(rsk_addr)
                 topic_id = peer_id  # how to get topic id from topic var?
 
-                print("awaiting responses for topic", topic_id)
+                print("listening on topic", topic_id)
                 for response in topic:
                     print("got response %s for topic %s" % (response, topic_id))
 
