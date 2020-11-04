@@ -7,16 +7,13 @@ from api_pb2 import Channel, PublishPayload, Msg, RskAddress
 from api_pb2_grpc import CommunicationsApiStub
 
 
-def run(rif_comms_address, rsk_addr_to_use):
+def run(rif_comms_address, topic_id):
     with insecure_channel(rif_comms_address) as channel:
         print("connecting to comms node at", rif_comms_address)
         stub = CommunicationsApiStub(channel)
 
-        rsk_addr = RskAddress(address=rsk_addr_to_use)
-        print("rsk address for destination is", rsk_addr.address)
-
-        peer_id = stub.LocatePeerId(rsk_addr).address
-        print("peer ID for destination is", peer_id)
+        print("topic id for destination is", topic_id)
+        stub.Subscribe(Channel(channelId=topic_id))  # this crashes if already subscribed
 
         print("press space to send a message or escape to exit")
 
@@ -24,7 +21,7 @@ def run(rif_comms_address, rsk_addr_to_use):
             if key == Key.space:
                 stub.SendMessageToTopic(
                     PublishPayload(
-                        topic=Channel(channelId=peer_id),
+                        topic=Channel(channelId=topic_id),
                         message=Msg(payload=str.encode("hey"))
                     )
                 )
@@ -38,5 +35,5 @@ def run(rif_comms_address, rsk_addr_to_use):
 
 if __name__ == "__main__":
     node_address = sys.argv[1]
-    rsk_address = sys.argv[2]
-    run(node_address, rsk_address)
+    topic_id = sys.argv[2]  # this should be an rsk address, not a topic id (LocatePeerID crashes)
+    run(node_address, topic_id)
