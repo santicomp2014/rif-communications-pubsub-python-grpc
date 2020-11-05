@@ -35,6 +35,7 @@ pip install -r requirements.txt
 | `sender.py`      | `python3 sender.py <RIF_COMMS_NODE_ADDRESS> <TOPIC_ID>`                     | connects to RIF Comms node, subscribes to topic, and sends messages to it based on user input. then, upon halting message sending, creates a topic with the topic id and fails.*²              |
 
 \*¹ needs to be executed multiple times sequentially to go through the entire script.
+<br/>
 \*² messages cause exceptions in the RIF Comms node.
 
 | parameter                  | description                                                                                                   | example                                                   |
