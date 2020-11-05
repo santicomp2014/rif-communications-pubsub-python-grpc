@@ -38,7 +38,7 @@ def run(rif_comms_node_address, rsk_addr_to_use):
                     )
                 )
 
-                print("unsubscribing from topic", topic_id)
+                print("closing topic", topic_id)
                 stub.CloseTopic(Channel(channelId=topic_id))
                 exit()
 

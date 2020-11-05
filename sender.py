@@ -38,7 +38,7 @@ def run(rif_comms_node_address, topic_id):
         while True:
             try:
                 print("creating topic with id", topic_id)
-                topic = stub.CreateTopicWithPeerId(topic_id)  # this is failing, so did CreateTopicWithRskAddress()
+                topic = stub.CreateTopicWithPeerId(topic_id)  # this is failing, so does CreateTopicWithRskAddress()
 
                 print("listening on topic", topic_id)
                 for response in topic:
@@ -47,7 +47,7 @@ def run(rif_comms_node_address, topic_id):
             except KeyboardInterrupt:
                 print("halting")
 
-                print("unsubscribing from topic", topic_id)
+                print("closing topic", topic_id)
                 stub.CloseTopic(Channel(channelId=topic_id))
                 exit()
 
