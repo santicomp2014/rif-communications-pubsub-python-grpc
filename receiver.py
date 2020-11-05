@@ -6,9 +6,9 @@ from api_pb2 import RskAddress, Msg, PublishPayload, Channel
 from api_pb2_grpc import CommunicationsApiStub
 
 
-def run(rif_comms_address, rsk_addr_to_use):
-    with insecure_channel(rif_comms_address) as channel:
-        print("connecting to comms node at", rif_comms_address)
+def run(rif_comms_node_address, rsk_addr_to_use):
+    with insecure_channel(rif_comms_node_address) as channel:
+        print("connecting to comms node at", rif_comms_node_address)
         stub = CommunicationsApiStub(channel)
 
         rsk_addr = RskAddress(address=rsk_addr_to_use)
