@@ -21,7 +21,8 @@ pip install -r requirements.txt
 
 ### 4. Execute test scripts
 #### 4.1 Requirements
-The virtual environment [must be activated](#2-Activate-virtual-environment) for these to work.
+1. the virtual environment [must be activated](#2-Activate-virtual-environment).
+2. at least 1 [RIF Comms node](https://github.com/rsksmart/rif-communications-pubsub-node/) must be running.
 
 #### 4.2 Scripts
 | script           | execution                                                                   | description                                                                                                                                                                                    |
