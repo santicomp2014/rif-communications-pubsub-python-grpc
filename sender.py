@@ -26,14 +26,15 @@ def run(rif_comms_node_address, topic_id):
                     )
                 )
             if key == Key.esc:
-                return False  # stop listener
+                return False  # stop message sending loop
 
-        # enter sending messages loop
+        # enter message sending loop
         with Listener(on_release=on_release) as listener:
             listener.join()
 
         print("done sending messages, now listening for messages")
 
+        # enter message receiving loop
         while True:
             try:
                 print("creating topic with id", topic_id)
