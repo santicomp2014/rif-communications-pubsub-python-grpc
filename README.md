@@ -25,7 +25,7 @@ pip install -r requirements.txt
 2. at least 1 [RIF Comms node](https://github.com/rsksmart/rif-communications-pubsub-node/) must be running.
 
 #### 4.2 Scripts
-| script           | execution                                                                   | description                                                                                                                                                                                    |
+| script           | execution                                                                   | behavior                                                                                                                                                                                       |
 | ---------------- | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `client-1.py`    | `python3 client-1.py`                                                       | unclear.                                                                                                                                                                                       |
 | `client-2.py`    | `python3 client-2.py`                                                       | unclear.                                                                                                                                                                                       |
