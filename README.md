@@ -40,6 +40,6 @@ pip install -r requirements.txt
 
 | parameter                  | description                                                                                                   | example                                                   |
 | -------------------------- | ------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| `<RIF_COMMS_NODE_ADDRESS>` | address and GRPC port for running RIF Comms node to connect to.                                               | `"localhost:5013"`                                        |
+| `<RIF_COMMS_NODE_ENDPOINT>` | address and GRPC port for running RIF Comms node to connect to.                                               | `"localhost:5013"`                                        |
 | `<RSK_ADDRESS>`            | RSK address to be used as sender or receiver of communications invoked from scripts, onto the RIF Comms node. | `"0x2aCc95758f8b5F583470bA265Eb685a8f45fC9D5"`            |
 | `<TOPIC_ID>`               | topic ID to be used by the script when subscribing to a topic.                                                | `"16Uiu2HAm7WTnfH5GLtFVTPMc79Qu8TzMoEKe4QEDnWiSBRjr8UZf"` |
