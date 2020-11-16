@@ -13,17 +13,19 @@ def run(target, address, channel_id):
         # time.sleep(10.0)
         notification = stub.ConnectToCommunicationsNode(rsk_address)
 
+        # response = stub.Publish(PublishPayload(topic="0xtestroom2", message=str.encode("HELLO")))
+        # time.sleep(10.0)
+        print("LocatePeerId")
+        response = stub.LocatePeerId(rsk_address)
+        print("response=%s" % response)
+
+        # channel = stub.CreateTopicWithPeerId(PeerId(address=channel_id))
+        print("CreateTopicWithRskAddress")
+        channel = stub.CreateTopicWithRskAddress(rsk_address)
+
         while True:
             try:
-                # response = stub.Publish(PublishPayload(topic="0xtestroom2", message=str.encode("HELLO")))
-                # time.sleep(10.0)
-                print("LocatePeerId")
-                response = stub.LocatePeerId(rsk_address)
-                print("response=%s" % response)
-
-                # channel = stub.CreateTopicWithPeerId(PeerId(address=channel_id))
-                print("CreateTopicWithRskAddress")
-                channel = stub.CreateTopicWithRskAddress(rsk_address)
+                
                 for resp in channel:
                     print(resp)
                 exit()

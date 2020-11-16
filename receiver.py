@@ -15,15 +15,15 @@ def run(rif_comms_node_address, rsk_addr_to_use):
         print("registering rsk address", rsk_addr.address)
         notification = stub.ConnectToCommunicationsNode(rsk_addr)  # what is this for? (also: ignored returned value)
 
+        peer_id = stub.LocatePeerId(rsk_addr).address
+        print("peer ID for rsk address is", peer_id)
+
+        print("creating topic for rsk address", rsk_addr.address)
+        topic = stub.CreateTopicWithRskAddress(rsk_addr)
+        topic_id = peer_id  # how to get topic id from topic var?
+
         while True:
             try:
-                peer_id = stub.LocatePeerId(rsk_addr).address
-                print("peer ID for rsk address is", peer_id)
-
-                print("creating topic for rsk address", rsk_addr.address)
-                topic = stub.CreateTopicWithRskAddress(rsk_addr)
-                topic_id = peer_id  # how to get topic id from topic var?
-
                 print("listening on topic", topic_id)
                 for response in topic:
                     print("got response %s for topic %s" % (response, topic_id))
