@@ -32,7 +32,7 @@ pip install -r requirements.txt
 | `lumino.py`      | `python3 lumino.py <RIF_COMMS_NODE_ENDPOINT> <RSK_ADDRESS> <TOPIC_ID>`       | connects to RIF Comms node, registers RSK address to get a peer ID, creates a topic with the address and awaits for responses from it. when halting, sends a message to topic and fails.*¹     |
 | `lumino-send.py` | `python3 lumino-send.py <RIF_COMMS_NODE_ENDPOINT> <TOPIC_ID_1> <TOPIC_ID_2>` | connects to RIF Comms node, subscribes to 2 topics, sends messages to them based on user input, then fails upon halting message sending.*²                                                     |
 | `receiver.py`    | `python3 receiver.py <RIF_COMMS_NODE_ENDPOINT> <RSK_ADDRESS>`                | connects to RIF Comms node, registers RSK address to get a peer ID, creates a topic with the address and awaits for responses from it. when halting, sends a message to topic and closes it.*¹ |
-| `sender.py`      | `python3 sender.py <RIF_COMMS_NODE_ENDPOINT> <TOPIC_ID>`                     | connects to RIF Comms node, subscribes to topic, and sends messages to it based on user input. then, upon halting message sending, creates a topic with the topic id and fails.*²              |
+| `sender.py`      | `python3 sender.py <RIF_COMMS_NODE_ENDPOINT> <RSK_ADDRESS>`                     | connects to RIF Comms node, subscribes to topic, and sends messages to it based on user input. then, upon halting message sending, creates a topic with the topic id and fails.*²              |
 
 \*¹ needs to be sequentially executed multiple times to go through the entire script.
 <br/>

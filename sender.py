@@ -3,14 +3,18 @@ import sys
 from grpc import insecure_channel
 from pynput.keyboard import Key, Listener
 
-from api_pb2 import Channel, PublishPayload, Msg
+from api_pb2 import RskAddress, Channel, PublishPayload, Msg
 from api_pb2_grpc import CommunicationsApiStub
+import time
 
 
-def run(rif_comms_node_address, topic_id):
+def run(rif_comms_node_address, rsk_address):
     with insecure_channel(rif_comms_node_address) as channel:
         print("connecting to comms node at", rif_comms_node_address)
         stub = CommunicationsApiStub(channel)
+        rsk_addr = RskAddress(address=rsk_address)
+        topic_id = stub.LocatePeerId(rsk_addr).address
+        print(topic_id)
 
         print("subscribing to topic", topic_id)
         stub.Subscribe(Channel(channelId=topic_id))  # this crashes if already subscribed
@@ -54,5 +58,5 @@ def run(rif_comms_node_address, topic_id):
 
 if __name__ == "__main__":
     node_address = sys.argv[1]
-    topic_id = sys.argv[2]  # this should be an rsk address, not a topic id, but LocatePeerID() fails
-    run(node_address, topic_id)
+    rsk_address = sys.argv[2]  # this should be an rsk address, not a topic id, but LocatePeerID() fails
+    run(node_address, rsk_address)
