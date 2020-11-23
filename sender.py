@@ -17,7 +17,8 @@ def run(rif_comms_node_address, rsk_address):
         print(topic_id)
 
         print("subscribing to topic", topic_id)
-        stub.Subscribe(Channel(channelId=topic_id))  # this crashes if already subscribed
+        #stub.Subscribe(Channel(channelId=topic_id))  # this crashes if already subscribed
+        topic = stub.CreateTopicWithRskAddress(rsk_addr)
 
         print("press space to send messages and esc to stop")
 
@@ -41,8 +42,8 @@ def run(rif_comms_node_address, rsk_address):
         # enter message receiving loop
         while True:
             try:
-                print("creating topic with id", topic_id)
-                topic = stub.CreateTopicWithPeerId(topic_id)
+                #print("creating topic with id", topic_id)
+                #topic = stub.CreateTopicWithPeerId(topic_id)
 
                 print("listening on topic", topic_id)
                 for response in topic:
