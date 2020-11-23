@@ -13,7 +13,7 @@ def run(rif_comms_node_address, rsk_addr_to_use):
 
         rsk_addr = RskAddress(address=rsk_addr_to_use)
         print("registering rsk address", rsk_addr.address)
-        notification = stub.ConnectToCommunicationsNode(rsk_addr)  # what is this for? (also: ignored returned value)
+        notification = stub.ConnectToCommunicationsNode(rsk_addr)
 
         peer_id = stub.LocatePeerId(rsk_addr).address
         print("peer ID for rsk address is", peer_id)
