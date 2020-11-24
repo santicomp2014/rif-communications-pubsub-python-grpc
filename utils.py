@@ -23,15 +23,12 @@ def unsubscribe_from_topic(stub: CommunicationsApiStub, topic_id: str):
     stub.CloseTopic(Channel(channelId=topic_id))
 
 
-def notification_to_message(notification: ChannelNewData) -> str:
-    print("notification", notification)
+def notification_to_message(notification: Notification) -> str:
     try:
-        content_text = notification.data
+        content_text = notification.channelNewData.data
         if content_text:
             content = json.loads(content_text.decode())
-            message_string = bytes(content["data"]).decode()
-            return json.loads(message_string)
+            return bytes(content["data"]).decode()
     except AttributeError:
-        print("attribute error")
         pass
     return None
