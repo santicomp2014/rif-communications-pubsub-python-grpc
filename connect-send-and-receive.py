@@ -57,7 +57,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
 
 
 if __name__ == "__main__":
-    node_address = sys.argv[1]
-    our_rsk_address = sys.argv[2]
-    peer_rsk_address = sys.argv[3]
-    run(node_address, our_rsk_address, peer_rsk_address)
+    comms_addr_param = sys.argv[1]
+    our_rsk_addr_param = sys.argv[2]
+    peer_rsk_address_param = sys.argv[3]
+    run(comms_addr_param, our_rsk_addr_param, peer_rsk_address_param)
