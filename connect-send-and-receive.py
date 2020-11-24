@@ -2,7 +2,7 @@ import sys
 
 from grpc import insecure_channel
 
-from api_pb2 import RskAddress, Msg, PublishPayload, Channel
+from api_pb2 import RskAddress, PublishPayload, Channel, Msg
 from api_pb2_grpc import CommunicationsApiStub
 from utils import subscribe_to_topic, unsubscribe_from_topic
 
