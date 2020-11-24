@@ -32,6 +32,6 @@ pip install -r requirements.txt
 | `connect-send-and-receive.py` | `python3 connect-send-and-receive.py <RIF_COMMS_NODE_ENDPOINT> <RSK_ADDRESS_1> <RSK_ADDRESS_2>` | connects to RIF Comms node, registers RSK address 1, subscribes to topic for said address and sends a message to it. then, subscribes to topic for RSK address 2 and awaits for messages from it. when halting, sends a message to its own topic and unsubscribes from it. |
 
 | parameter                   | description                                                                           | example                                                   |
-| --------------------------- | --------------------------------------------------------------------------------------| --------------------------------------------------------- |
+| --------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | `<RIF_COMMS_NODE_ENDPOINT>` | address and GRPC port for the running RIF Comms node to connect to.                   | `"localhost:5013"`                                        |
 | `<RSK_ADDRESS>`             | RSK address to be registered in the RIF Comms node, or as a topic ID to subscribe to. | `"0x2aCc95758f8b5F583470bA265Eb685a8f45fC9D5"`            |
