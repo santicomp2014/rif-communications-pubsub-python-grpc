@@ -1,4 +1,6 @@
-from api_pb2 import RskAddress, Notification, Channel
+import json
+
+from api_pb2 import RskAddress, Notification, Channel, ChannelNewData
 from api_pb2_grpc import CommunicationsApiStub
 
 
@@ -19,3 +21,17 @@ def unsubscribe_from_topic(stub: CommunicationsApiStub, topic_id: str):
     print("unsubscribing from topic", topic_id)
 
     stub.CloseTopic(Channel(channelId=topic_id))
+
+
+def notification_to_message(notification: ChannelNewData) -> str:
+    print("notification", notification)
+    try:
+        content_text = notification.data
+        if content_text:
+            content = json.loads(content_text.decode())
+            message_string = bytes(content["data"]).decode()
+            return json.loads(message_string)
+    except AttributeError:
+        print("attribute error")
+        pass
+    return None

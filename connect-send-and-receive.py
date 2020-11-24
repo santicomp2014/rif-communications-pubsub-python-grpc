@@ -4,7 +4,7 @@ from grpc import insecure_channel
 
 from api_pb2 import RskAddress, PublishPayload, Channel, Msg
 from api_pb2_grpc import CommunicationsApiStub
-from utils import subscribe_to_topic, unsubscribe_from_topic
+from utils import subscribe_to_topic, unsubscribe_from_topic, notification_to_message
 
 
 def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str):
@@ -38,7 +38,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
 
                 for topic_message in peer_topic:
                     # TODO: deserialize response
-                    print("got message %s for topic %s" % (topic_message, peer_topic_id))
+                    print("got message %s for topic %s" % (notification_to_message(topic_message), peer_topic_id))
 
             except KeyboardInterrupt:
                 print("saying goodbye on our topic")
