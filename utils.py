@@ -1,6 +1,6 @@
 import json
 
-from api_pb2 import RskAddress, Notification, Channel, ChannelNewData
+from api_pb2 import RskAddress, Notification, Channel
 from api_pb2_grpc import CommunicationsApiStub
 
 
