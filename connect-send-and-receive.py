@@ -37,7 +37,6 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
                 print("press ctrl+c to stop listening and say \"goodbye\" on our topic")
 
                 for topic_message in peer_topic:
-                    # TODO: deserialize response
                     print("got message %s for topic %s" % (notification_to_message(topic_message), peer_topic_id))
 
             except KeyboardInterrupt:
