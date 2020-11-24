@@ -4,65 +4,54 @@ from grpc import insecure_channel
 
 from api_pb2 import RskAddress, Msg, PublishPayload, Channel
 from api_pb2_grpc import CommunicationsApiStub
+from utils import subscribe_to_topic, unsubscribe_from_topic
 
 
-def run(rif_comms_node_address, our_rsk_address, peer_rsk_address):
+def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str):
     with insecure_channel(rif_comms_node_address) as channel:
         print("connecting to comms node at", rif_comms_node_address)
         stub = CommunicationsApiStub(channel)
 
         our_rsk_addr = RskAddress(address=our_rsk_address)
         print("registering our rsk address", our_rsk_addr.address)
+        # TODO: how can we keep this from blocking without a var assignment?
         notification = stub.ConnectToCommunicationsNode(our_rsk_addr)
 
-        our_peer_id = stub.LocatePeerId(our_rsk_addr).address
-        print("our peer ID is", our_peer_id)
-
-        print("creating topic for our address", our_rsk_addr.address)
-        our_topic = stub.CreateTopicWithRskAddress(our_rsk_addr)
-        our_topic_id = our_peer_id  # how to get topic id from topic var?
+        _, our_topic_id = subscribe_to_topic(stub, our_rsk_address)
         print("our topic ID is", our_topic_id)
 
-        input("press enter to say hi on our topic")
+        input("press enter to say \"hello\" on our topic")
 
         stub.SendMessageToTopic(
             PublishPayload(
                 topic=Channel(channelId=our_topic_id),
-                message=Msg(payload=str.encode("hi"))
+                message=Msg(payload=str.encode("hello"))
             )
         )
 
-        peer_rsk_addr = RskAddress(address=peer_rsk_address)
-        print("subscribing to peer rsk address", peer_rsk_address.address)
-
-        peer_peer_id = stub.LocatePeerId(peer_rsk_addr).address
-        print("peer peer ID is", our_peer_id)
-
-        print("creating topic for peer address", peer_rsk_addr.address)
-        peer_topic = stub.CreateTopicWithRskAddress(our_rsk_addr)
-        peer_topic_id = peer_peer_id  # how to get topic id from topic var?
+        peer_topic, peer_topic_id = subscribe_to_topic(stub, peer_rsk_address)
 
         while True:
             try:
                 print("listening on topic", peer_topic_id)
-                for response in peer_topic:
-                    print("got response %s for topic %s" % (response, peer_topic_id))
+                print("press ctrl+c to stop listening and say \"goodbye\" on our topic")
+
+                for topic_message in peer_topic:
+                    # TODO: deserialize response
+                    print("got message %s for topic %s" % (topic_message, peer_topic_id))
 
             except KeyboardInterrupt:
-                print("saying goodby on our topic")
+                print("saying goodbye on our topic")
 
                 stub.SendMessageToTopic(
                     PublishPayload(
                         topic=Channel(channelId=our_topic_id),
-                        message=Msg(payload=str.encode("bye"))
+                        message=Msg(payload=str.encode("goodbye"))
                     )
                 )
 
-                print("closing our topic", our_topic_id)
-                stub.CloseTopic(Channel(channelId=our_topic_id))
-
-                print("closing peer topic", peer_topic_id)
-                stub.CloseTopic(Channel(channelId=peer_topic_id))
+                unsubscribe_from_topic(stub, our_topic_id)
+                unsubscribe_from_topic(stub, peer_topic_id)
 
                 exit()
 
