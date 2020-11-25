@@ -15,13 +15,16 @@ def run(rif_comms_node_address, our_rsk_address, peer_rsk_address):
         print("registering our rsk address", our_rsk_addr.address)
         notification = stub.ConnectToCommunicationsNode(our_rsk_addr)
 
-        our_peer_id = stub.LocatePeerId(our_rsk_addr).address
-        print("our peer ID is", our_peer_id)
+        our_topic_id = ""
 
         print("creating topic for our address", our_rsk_addr.address)
         our_topic = stub.CreateTopicWithRskAddress(our_rsk_addr)
-        our_topic_id = our_peer_id  # how to get topic id from topic var?
-        print("our topic ID is", our_topic_id)
+        for response in our_topic:
+            if (response.channelPeerJoined.peerId):
+                our_topic_id = response.channelPeerJoined.peerId
+                print("our topic ID is", our_topic_id)
+                break
+        
 
         input("press enter to say hi on our topic")
 
@@ -33,14 +36,16 @@ def run(rif_comms_node_address, our_rsk_address, peer_rsk_address):
         )
 
         peer_rsk_addr = RskAddress(address=peer_rsk_address)
-        print("subscribing to peer rsk address", peer_rsk_address.address)
-
-        peer_peer_id = stub.LocatePeerId(peer_rsk_addr).address
-        print("peer peer ID is", our_peer_id)
-
+        print("subscribing to peer rsk address", peer_rsk_addr.address)
+        
+        peer_topic_id = ""
         print("creating topic for peer address", peer_rsk_addr.address)
-        peer_topic = stub.CreateTopicWithRskAddress(our_rsk_addr)
-        peer_topic_id = peer_peer_id  # how to get topic id from topic var?
+        peer_topic = stub.CreateTopicWithRskAddress(peer_rsk_addr)
+        for response in peer_topic:
+            if (response.channelPeerJoined.peerId):
+                peer_topic_id = response.channelPeerJoined.peerId
+                print("peer topic ID is", peer_topic_id)
+                break
 
         while True:
             try:

@@ -12,10 +12,16 @@ def run(rif_comms_node_address, rsk_address):
         print("connecting to comms node at", rif_comms_node_address)
         stub = CommunicationsApiStub(channel)
         rsk_addr = RskAddress(address=rsk_address)
-        topic_id = stub.LocatePeerId(rsk_addr).address
 
+        topic_id = ""
         print("subscribing to topic", topic_id)
         topic = stub.CreateTopicWithRskAddress(rsk_addr)
+        for response in topic:
+            if (response.channelPeerJoined.peerId):
+                topic_id = response.channelPeerJoined.peerId
+                print("peer ID for rsk address is", topic_id)
+                break
+            
 
         print("press space to send messages and esc to stop")
 
