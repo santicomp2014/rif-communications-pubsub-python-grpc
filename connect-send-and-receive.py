@@ -17,35 +17,36 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
         # TODO: how can we keep this from blocking without a var assignment?
         notification = stub.ConnectToCommunicationsNode(our_rsk_addr)
 
-        _, our_topic_id = subscribe_to_topic(stub, our_rsk_address)
+        our_topic, our_topic_id = subscribe_to_topic(stub, our_rsk_address)
         print("our topic ID is", our_topic_id)
 
-        input("press enter to say \"hello\" on our topic")
+        input("press enter to say \"hello\" to peer topic")
+
+        peer_topic, peer_topic_id = subscribe_to_topic(stub, peer_rsk_address)
+        print("peer topic ID is", peer_topic_id)
 
         stub.SendMessageToTopic(
             PublishPayload(
-                topic=Channel(channelId=our_topic_id),
-                message=Msg(payload=str.encode("hello"))
+                topic=Channel(channelId=peer_topic_id),
+                message=Msg(payload=str.encode("hello to peer"))
             )
         )
 
-        peer_topic, peer_topic_id = subscribe_to_topic(stub, peer_rsk_address)
-
         while True:
             try:
-                print("listening on topic", peer_topic_id)
-                print("press ctrl+c to stop listening and say \"goodbye\" on our topic")
+                print("listening on our topic", our_topic_id)
+                print("press ctrl+c to stop listening and say \"goodbye\" to peer topic")
 
-                for topic_message in peer_topic:
-                    print("got message %s for topic %s" % (notification_to_message(topic_message), peer_topic_id))
+                for topic_message in our_topic:
+                    print("got message %s for topic %s" % (notification_to_message(topic_message), our_topic_id))
 
             except KeyboardInterrupt:
-                print("saying \"goodbye\" on our topic")
+                print("saying \"goodbye\" to peer topic")
 
                 stub.SendMessageToTopic(
                     PublishPayload(
-                        topic=Channel(channelId=our_topic_id),
-                        message=Msg(payload=str.encode("goodbye"))
+                        topic=Channel(channelId=peer_topic_id),
+                        message=Msg(payload=str.encode("goodbye to peer"))
                     )
                 )
 
