@@ -1,4 +1,4 @@
-import sys, time
+import sys
 
 from grpc import insecure_channel
 
@@ -20,18 +20,27 @@ def run(rif_comms_node_address, our_rsk_address):
         print("creating topic for our address", our_rsk_addr.address)
         our_topic = stub.CreateTopicWithRskAddress(our_rsk_addr)
         for response in our_topic:
-            if (response.channelPeerJoined.peerId):
-                print("Received message")
+            if response.channelPeerJoined.peerId:
+                print("received message")
                 print(response)
                 our_topic_id = response.channelPeerJoined.peerId
                 break
 
+        print("saying hi")
         stub.SendMessageToTopic(
             PublishPayload(
                 topic=Channel(channelId=our_topic_id),
                 message=Msg(payload=str.encode("hi"))
             )
-        )        
+        )
+
+        print("listening again")
+        for response in our_topic:
+            if response.channelPeerJoined.peerId:
+                print("received message")
+                print(response)
+                break
+
 
 if __name__ == "__main__":
     node_address = sys.argv[1]

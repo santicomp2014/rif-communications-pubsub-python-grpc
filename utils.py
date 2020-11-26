@@ -7,15 +7,15 @@ from api_pb2_grpc import CommunicationsApiStub
 def subscribe_to_topic(stub: CommunicationsApiStub, rsk_address: str) -> (Notification, str):
     rsk_addr = RskAddress(address=rsk_address)
 
-    print("subscribing to topic for rsk address", rsk_addr.address)
+    print("subscribing to topic for rsk address", rsk_addr)
     topic = stub.CreateTopicWithRskAddress(rsk_addr)
     topic_id = ""
 
     for response in topic:
-            if (response.channelPeerJoined.peerId):
-                topic_id = response.channelPeerJoined.peerId
-                print("our topic ID is", topic_id)
-                break
+        if response.channelPeerJoined.peerId:
+            topic_id = response.channelPeerJoined.peerId
+            print("our topic ID is", topic_id)
+            break
 
     print("topic id for rsk address", rsk_addr.address, "is", topic_id)
 
@@ -24,7 +24,6 @@ def subscribe_to_topic(stub: CommunicationsApiStub, rsk_address: str) -> (Notifi
 
 def unsubscribe_from_topic(stub: CommunicationsApiStub, topic_id: str):
     print("unsubscribing from topic", topic_id)
-
     stub.CloseTopic(Channel(channelId=topic_id))
 
 
