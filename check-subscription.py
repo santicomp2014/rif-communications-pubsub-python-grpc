@@ -26,21 +26,22 @@ def run(rif_comms_node_address: str, our_rsk_address: str):
         while True:
             try:
                 sub_option = let_user_pick(
-                    "pick a REGISTERED address to subscribe to. press ctrl-c when done.", addresses
+                    "\npick a REGISTERED address to subscribe to. press ctrl-c when done.", addresses
                 ) - 1
                 subscribe_to_topic(stub, addresses[sub_option])
             except KeyboardInterrupt:
+                print("\n")
                 break
 
         # check subscriptions to topic
         while True:
             try:
                 sub_check_option = let_user_pick(
-                    "pick a REGISTERED address to check subscription to. press ctrl-c when done.", addresses
+                    "\npick a REGISTERED address to check subscription to. press ctrl-c when done.", addresses
                 ) - 1
                 print(
-                    "is", our_rsk_address, "subscribed to", addresses[sub_check_option], "?",
-                    is_subscribed_to(our_rsk_address, addresses[sub_check_option])
+                    "\nis\n    ", our_rsk_address, "\nsubscribed to\n    ", addresses[sub_check_option],
+                    "\n?", "\n→ " + str(is_subscribed_to(stub, our_rsk_address, addresses[sub_check_option]))
                 )
             except KeyboardInterrupt:
                 exit()

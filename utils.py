@@ -7,23 +7,22 @@ from api_pb2_grpc import CommunicationsApiStub
 def subscribe_to_topic(stub: CommunicationsApiStub, rsk_address: str) -> (Notification, str):
     rsk_addr = RskAddress(address=rsk_address)
 
-    print("\nsubscribing to topic for rsk address", rsk_addr)
+    print("\nsubscribing to topic for rsk address", rsk_address)
     topic = stub.CreateTopicWithRskAddress(rsk_addr)
 
     topic_id = ""
     for response in topic:
         if response.channelPeerJoined.peerId:
             topic_id = response.channelPeerJoined.peerId
-            print("our topic ID is", topic_id)
             break
 
-    print("topic id for rsk address", rsk_addr.address, "is", topic_id)
+    print("topic id for rsk address", rsk_address, "is:\n" + str(topic_id))
 
     return topic, topic_id
 
 
 def is_subscribed_to(stub: CommunicationsApiStub, subscriber_address: str, topic_address: str) -> bool:
-    print("\nchecking subscription for", subscriber_address, "to topic ", topic_address)
+    print("\nchecking subscription for", subscriber_address, "to topic", topic_address)
 
     our_peer_id = get_peer_id(stub, subscriber_address)
     topic_id = get_peer_id(stub, topic_address)
@@ -55,8 +54,9 @@ def notification_to_message(notification: Notification) -> str:
     return None
 
 
-def let_user_pick(options: []) -> int:
+def let_user_pick(prompt: str, options: []) -> int:
     while True:
+        print(prompt)
         for idx, element in enumerate(options):
             print("{}) {}".format(idx + 1, element))
         i = input("enter number: ")
