@@ -16,7 +16,7 @@ def subscribe_to_topic(stub: CommunicationsApiStub, rsk_address: str) -> (Notifi
             topic_id = response.channelPeerJoined.peerId
             break
 
-    print("topic id for rsk address", rsk_address, "is:\n" + str(topic_id))
+    print("topic id for rsk address", rsk_address, "is:\n" + topic_id)
 
     return topic, topic_id
 

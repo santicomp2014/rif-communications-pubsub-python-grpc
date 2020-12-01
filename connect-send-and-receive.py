@@ -46,7 +46,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
                 stub.SendMessageToTopic(
                     PublishPayload(
                         topic=Channel(channelId=peer_topic_id),
-                        message=Msg(payload=str.encode("goodbye from" + our_rsk_address))
+                        message=Msg(payload=str.encode("goodbye from " + our_rsk_address))
                     )
                 )
 
