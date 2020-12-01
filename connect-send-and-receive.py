@@ -20,7 +20,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
         our_topic, our_topic_id = subscribe_to_topic(stub, our_rsk_address)
         print("our topic ID is", our_topic_id)
 
-        input("press enter to say \"hello\" to peer topic")
+        input("\npress enter to say \"hello\" to peer topic for rsk address " + peer_rsk_address)
 
         peer_topic, peer_topic_id = subscribe_to_topic(stub, peer_rsk_address)
         print("peer topic ID is", peer_topic_id)
@@ -28,25 +28,25 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
         stub.SendMessageToTopic(
             PublishPayload(
                 topic=Channel(channelId=peer_topic_id),
-                message=Msg(payload=str.encode("hello to peer"))
+                message=Msg(payload=str.encode("hello from " + our_rsk_address))
             )
         )
 
         while True:
             try:
-                print("listening on our topic", our_topic_id)
-                print("press ctrl+c to stop listening and say \"goodbye\" to peer topic")
+                print("\nlistening on our topic", our_topic_id)
+                print("press ctrl+c to stop listening and say \"goodbye\" to peer topic " + peer_topic_id)
 
                 for topic_message in our_topic:
-                    print("got message %s for topic %s" % (notification_to_message(topic_message), our_topic_id))
+                    print("got message \"%s\" for topic %s" % (notification_to_message(topic_message), our_topic_id))
 
             except KeyboardInterrupt:
-                print("saying \"goodbye\" to peer topic")
+                print("saying \"goodbye\" to peer topic " + peer_topic_id)
 
                 stub.SendMessageToTopic(
                     PublishPayload(
                         topic=Channel(channelId=peer_topic_id),
-                        message=Msg(payload=str.encode("goodbye to peer"))
+                        message=Msg(payload=str.encode("goodbye from" + our_rsk_address))
                     )
                 )
 
