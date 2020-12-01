@@ -18,12 +18,10 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
         notification = stub.ConnectToCommunicationsNode(our_rsk_addr)
 
         our_topic, our_topic_id = subscribe_to_topic(stub, our_rsk_address)
-        print("our topic ID is", our_topic_id)
 
         input("\npress enter to say \"hello\" to peer topic for rsk address " + peer_rsk_address)
 
         peer_topic, peer_topic_id = subscribe_to_topic(stub, peer_rsk_address)
-        print("peer topic ID is", peer_topic_id)
 
         stub.SendMessageToTopic(
             PublishPayload(
