@@ -25,7 +25,9 @@ def run(rif_comms_node_address, our_rsk_address):
 
             if response.channelPeerJoined.peerId:
                 our_topic_id = response.channelPeerJoined.peerId
-
+            if (response.subscribeError.reason):
+                print("Error Subscribing",response.subscribeError.reason)
+                exit()    
             input("press enter to say \"ping\" on our own topic, or ctrl+c to exit")
             stub.SendMessageToTopic(
                 PublishPayload(

@@ -23,6 +23,9 @@ def run(rif_comms_node_address, rsk_addr_to_use):
                 topic_id = response.channelPeerJoined.peerId
                 print("peer ID for rsk address is", topic_id)
                 break
+            if (response.subscribeError.reason):
+                print("Error Subscribing",response.subscribeError.reason)
+                exit()
 
         while True:
             try:

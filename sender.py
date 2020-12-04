@@ -21,6 +21,9 @@ def run(rif_comms_node_address, rsk_address):
                 topic_id = response.channelPeerJoined.peerId
                 print("peer ID for rsk address is", topic_id)
                 break
+            if (response.subscribeError.reason):
+                print("Error Subscribing",response.subscribeError.reason)
+                exit()
             
 
         print("press space to send messages and esc to stop")

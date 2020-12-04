@@ -15,6 +15,8 @@ def subscribe_to_topic(stub: CommunicationsApiStub, rsk_address: str) -> (Notifi
         if response.channelPeerJoined.peerId:
             topic_id = response.channelPeerJoined.peerId
             break
+        if (response.subscribeError.reason):
+                raise Exception(("Error Subscribing",response.subscribeError.reason))
 
     print("topic id for rsk address", rsk_address, "is:\n" + topic_id)
 
