@@ -78,7 +78,7 @@ class CommunicationsApiStub(object):
                 )
         self.SendMessageToTopic = channel.unary_unary(
                 '/communicationsapi.CommunicationsApi/SendMessageToTopic',
-                request_serializer=api__pb2.PublishPayload.SerializeToString,
+                request_serializer=api__pb2.RskPayload.SerializeToString,
                 response_deserializer=api__pb2.Void.FromString,
                 )
         self.UpdateAddress = channel.unary_unary(
@@ -257,7 +257,7 @@ def add_CommunicationsApiServicer_to_server(servicer, server):
             ),
             'SendMessageToTopic': grpc.unary_unary_rpc_method_handler(
                     servicer.SendMessageToTopic,
-                    request_deserializer=api__pb2.PublishPayload.FromString,
+                    request_deserializer=api__pb2.RskPayload.FromString,
                     response_serializer=api__pb2.Void.SerializeToString,
             ),
             'UpdateAddress': grpc.unary_unary_rpc_method_handler(
@@ -493,7 +493,7 @@ class CommunicationsApi(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/SendMessageToTopic',
-            api__pb2.PublishPayload.SerializeToString,
+            api__pb2.RskPayload.SerializeToString,
             api__pb2.Void.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
