@@ -35,3 +35,9 @@ pip install -r requirements.txt
 | --------------------------- | ------------------------------------------------------------------------------------- | --------------------------------------------------------- |
 | `<RIF_COMMS_NODE_ENDPOINT>` | address and GRPC port for the running RIF Comms node to connect to.                   | `"localhost:5013"`                                        |
 | `<RSK_ADDRESS>`             | RSK address to be registered in the RIF Comms node, or as a topic ID to subscribe to. | `"0x2aCc95758f8b5F583470bA265Eb685a8f45fC9D5"`            |
+
+
+#### 5. Update Proto files
+- Copy new proto to `api.proto`
+- activate enviroment
+- `python3 -m grpc_tools.protoc -I./proto --python_out=. --grpc_python_out=. ./proto/api.proto --experimental_allow_proto3_optional`
