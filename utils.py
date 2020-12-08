@@ -30,7 +30,7 @@ def is_subscribed_to(stub: CommunicationsApiStub, subscriber_address: str, topic
     topic_id = get_peer_id(stub, topic_address)
     return stub.HasSubscriber(
         Subscriber(
-            peerId=our_peer_id,
+            peerId=topic_id,
             channel=Channel(channelId=topic_id)
         )
     ).value
