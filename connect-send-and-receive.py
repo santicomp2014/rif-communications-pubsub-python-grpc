@@ -25,7 +25,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
 
         stub.SendMessageToRskAddress(
             RskAddressPublish(
-                address=peer_rsk_address,
+                receiver=RskAddress(address=peer_rsk_address),
                 message=Msg(payload=str.encode("hello from " + our_rsk_address))
             )
         )
@@ -43,7 +43,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
 
                 stub.SendMessageToRskAddress(
                     RskAddressPublish(
-                        address=peer_rsk_address,
+                        receiver=RskAddress(address=peer_rsk_address),
                         message=Msg(payload=str.encode("goodbye from " + our_rsk_address))
                     )
                 )

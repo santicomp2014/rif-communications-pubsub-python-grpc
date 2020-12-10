@@ -32,7 +32,7 @@ def run(rif_comms_node_address, rsk_address):
             if key == Key.space:
                 stub.SendMessageToRskAddress(
                     RskAddressPublish(
-                        address=rsk_address,
+                        receiver=RskAddress(address=rsk_address),
                         message=Msg(payload=str.encode("hey"))
                     )
                 )
