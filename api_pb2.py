@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\tapi.proto\x12\x11\x63ommunicationsapi\"\x1c\n\x07\x43hannel\x12\x11\n\tchannelId\x18\x01 \x01(\t\"0\n\nRskAddress\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x11\n\texclusive\x18\x02 \x01(\x08\",\n\x06PeerId\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x11\n\texclusive\x18\x02 \x01(\x08\"\x06\n\x04Void\"\x16\n\x03Msg\x12\x0f\n\x07payload\x18\x01 \x01(\x0c\"d\n\x0ePublishPayload\x12)\n\x05topic\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\'\n\x07message\x18\x02 \x01(\x0b\x32\x16.communicationsapi.Msg\"\x1d\n\x0bSubscribers\x12\x0e\n\x06peerId\x18\x01 \x03(\t\"I\n\nSubscriber\x12\x0e\n\x06peerId\x18\x01 \x01(\t\x12+\n\x07\x63hannel\x18\x02 \x01(\x0b\x32\x1a.communicationsapi.Channel\" \n\x0f\x42ooleanResponse\x12\r\n\x05value\x18\x01 \x01(\x08\"\xa5\x04\n\x0cNotification\x12\x33\n\npeerNewMsg\x18\x01 \x01(\x0b\x32\x1d.communicationsapi.PeerNewMsgH\x00\x12\x41\n\x11peerChannelInvite\x18\x02 \x01(\x0b\x32$.communicationsapi.PeerChannelInviteH\x00\x12G\n\x14peerSignatureRequest\x18\x03 \x01(\x0b\x32\'.communicationsapi.PeerSignatureRequestH\x00\x12;\n\x0e\x63hannelNewData\x18\x04 \x01(\x0b\x32!.communicationsapi.ChannelNewDataH\x00\x12=\n\x0f\x63hannelPeerLeft\x18\x05 \x01(\x0b\x32\".communicationsapi.ChannelPeerLeftH\x00\x12\x41\n\x11\x63hannelPeerJoined\x18\x06 \x01(\x0b\x32$.communicationsapi.ChannelPeerJoinedH\x00\x12\x43\n\x12serverNotification\x18\x07 \x01(\x0b\x32%.communicationsapi.ServerNotificationH\x00\x12;\n\x0esubscribeError\x18\x08 \x01(\x0b\x32!.communicationsapi.SubscribeErrorH\x00\x42\x13\n\x11notification_type\"{\n\nPeerNewMsg\x12\'\n\x07message\x18\x01 \x01(\x0b\x32\x16.communicationsapi.Msg\x12\x13\n\x06peerId\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x16\n\tsignature\x18\x03 \x01(\x0cH\x01\x88\x01\x01\x42\t\n\x07_peerIdB\x0c\n\n_signature\"\x94\x01\n\x11PeerChannelInvite\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\x12\x12\n\x05nonce\x18\x03 \x01(\x0cH\x00\x88\x01\x01\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x01\x88\x01\x01\x42\x08\n\x06_nonceB\x0c\n\n_signature\"o\n\x14PeerSignatureRequest\x12\x12\n\ndataToSign\x18\x01 \x01(\x0c\x12\x0e\n\x06peerId\x18\x02 \x01(\t\x12\r\n\x05nonce\x18\x03 \x01(\x0c\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x00\x88\x01\x01\x42\x0c\n\n_signature\"y\n\x15PeerSignatureResponse\x12\x0e\n\x06peerId\x18\x01 \x01(\t\x12\x13\n\x0bsignedNonce\x18\x02 \x01(\x0c\x12\x15\n\rdataSignature\x18\x03 \x01(\x0c\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x00\x88\x01\x01\x42\x0c\n\n_signature\"v\n\x0e\x43hannelNewData\x12\x11\n\x04\x66rom\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05nonce\x18\x03 \x01(\x0c\x12+\n\x07\x63hannel\x18\x04 \x03(\x0b\x32\x1a.communicationsapi.ChannelB\x07\n\x05_from\"N\n\x0f\x43hannelPeerLeft\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\"P\n\x11\x43hannelPeerJoined\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\";\n\x12ServerNotification\x12\x14\n\x0cnotification\x18\x01 \x01(\x0c\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\"M\n\x0eSubscribeError\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06reason\x18\x02 \x01(\t2\xc7\x08\n\x11\x43ommunicationsApi\x12_\n\x1b\x43onnectToCommunicationsNode\x12\x1d.communicationsapi.RskAddress\x1a\x1f.communicationsapi.Notification0\x01\x12\x44\n\x10\x45ndCommunication\x12\x17.communicationsapi.Void\x1a\x17.communicationsapi.Void\x12\x45\n\x07Publish\x12!.communicationsapi.PublishPayload\x1a\x17.communicationsapi.Void\x12@\n\tSubscribe\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12\x42\n\x0bUnsubscribe\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12L\n\x0eGetSubscribers\x12\x1a.communicationsapi.Channel\x1a\x1e.communicationsapi.Subscribers\x12R\n\rHasSubscriber\x12\x1d.communicationsapi.Subscriber\x1a\".communicationsapi.BooleanResponse\x12>\n\x0bSendMessage\x12\x16.communicationsapi.Msg\x1a\x17.communicationsapi.Void\x12H\n\x0cLocatePeerId\x12\x1d.communicationsapi.RskAddress\x1a\x19.communicationsapi.PeerId\x12U\n\x15\x43reateTopicWithPeerId\x12\x19.communicationsapi.PeerId\x1a\x1f.communicationsapi.Notification0\x01\x12]\n\x19\x43reateTopicWithRskAddress\x12\x1d.communicationsapi.RskAddress\x1a\x1f.communicationsapi.Notification0\x01\x12\x41\n\nCloseTopic\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12P\n\x12SendMessageToTopic\x12!.communicationsapi.PublishPayload\x1a\x17.communicationsapi.Void\x12G\n\rUpdateAddress\x12\x1d.communicationsapi.RskAddress\x1a\x17.communicationsapi.Voidb\x06proto3'
+  serialized_pb=b'\n\tapi.proto\x12\x11\x63ommunicationsapi\"\x1c\n\x07\x43hannel\x12\x11\n\tchannelId\x18\x01 \x01(\t\"0\n\nRskAddress\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x11\n\texclusive\x18\x02 \x01(\x08\",\n\x06PeerId\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\x11\n\texclusive\x18\x02 \x01(\x08\"\x06\n\x04Void\"\x16\n\x03Msg\x12\x0f\n\x07payload\x18\x01 \x01(\x0c\"d\n\x0ePublishPayload\x12)\n\x05topic\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\'\n\x07message\x18\x02 \x01(\x0b\x32\x16.communicationsapi.Msg\"M\n\x11RskAddressPublish\x12\x0f\n\x07\x61\x64\x64ress\x18\x01 \x01(\t\x12\'\n\x07message\x18\x02 \x01(\x0b\x32\x16.communicationsapi.Msg\"\x1d\n\x0bSubscribers\x12\x0e\n\x06peerId\x18\x01 \x03(\t\"I\n\nSubscriber\x12\x0e\n\x06peerId\x18\x01 \x01(\t\x12+\n\x07\x63hannel\x18\x02 \x01(\x0b\x32\x1a.communicationsapi.Channel\" \n\x0f\x42ooleanResponse\x12\r\n\x05value\x18\x01 \x01(\x08\"\xa5\x04\n\x0cNotification\x12\x33\n\npeerNewMsg\x18\x01 \x01(\x0b\x32\x1d.communicationsapi.PeerNewMsgH\x00\x12\x41\n\x11peerChannelInvite\x18\x02 \x01(\x0b\x32$.communicationsapi.PeerChannelInviteH\x00\x12G\n\x14peerSignatureRequest\x18\x03 \x01(\x0b\x32\'.communicationsapi.PeerSignatureRequestH\x00\x12;\n\x0e\x63hannelNewData\x18\x04 \x01(\x0b\x32!.communicationsapi.ChannelNewDataH\x00\x12=\n\x0f\x63hannelPeerLeft\x18\x05 \x01(\x0b\x32\".communicationsapi.ChannelPeerLeftH\x00\x12\x41\n\x11\x63hannelPeerJoined\x18\x06 \x01(\x0b\x32$.communicationsapi.ChannelPeerJoinedH\x00\x12\x43\n\x12serverNotification\x18\x07 \x01(\x0b\x32%.communicationsapi.ServerNotificationH\x00\x12;\n\x0esubscribeError\x18\x08 \x01(\x0b\x32!.communicationsapi.SubscribeErrorH\x00\x42\x13\n\x11notification_type\"{\n\nPeerNewMsg\x12\'\n\x07message\x18\x01 \x01(\x0b\x32\x16.communicationsapi.Msg\x12\x13\n\x06peerId\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x16\n\tsignature\x18\x03 \x01(\x0cH\x01\x88\x01\x01\x42\t\n\x07_peerIdB\x0c\n\n_signature\"\x94\x01\n\x11PeerChannelInvite\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\x12\x12\n\x05nonce\x18\x03 \x01(\x0cH\x00\x88\x01\x01\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x01\x88\x01\x01\x42\x08\n\x06_nonceB\x0c\n\n_signature\"o\n\x14PeerSignatureRequest\x12\x12\n\ndataToSign\x18\x01 \x01(\x0c\x12\x0e\n\x06peerId\x18\x02 \x01(\t\x12\r\n\x05nonce\x18\x03 \x01(\x0c\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x00\x88\x01\x01\x42\x0c\n\n_signature\"y\n\x15PeerSignatureResponse\x12\x0e\n\x06peerId\x18\x01 \x01(\t\x12\x13\n\x0bsignedNonce\x18\x02 \x01(\x0c\x12\x15\n\rdataSignature\x18\x03 \x01(\x0c\x12\x16\n\tsignature\x18\x04 \x01(\x0cH\x00\x88\x01\x01\x42\x0c\n\n_signature\"v\n\x0e\x43hannelNewData\x12\x11\n\x04\x66rom\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x0c\n\x04\x64\x61ta\x18\x02 \x01(\x0c\x12\r\n\x05nonce\x18\x03 \x01(\x0c\x12+\n\x07\x63hannel\x18\x04 \x03(\x0b\x32\x1a.communicationsapi.ChannelB\x07\n\x05_from\"N\n\x0f\x43hannelPeerLeft\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\"P\n\x11\x43hannelPeerJoined\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06peerId\x18\x02 \x01(\t\";\n\x12ServerNotification\x12\x14\n\x0cnotification\x18\x01 \x01(\x0c\x12\x0f\n\x07payload\x18\x02 \x01(\x0c\"M\n\x0eSubscribeError\x12+\n\x07\x63hannel\x18\x01 \x01(\x0b\x32\x1a.communicationsapi.Channel\x12\x0e\n\x06reason\x18\x02 \x01(\t2\xa1\t\n\x11\x43ommunicationsApi\x12_\n\x1b\x43onnectToCommunicationsNode\x12\x1d.communicationsapi.RskAddress\x1a\x1f.communicationsapi.Notification0\x01\x12\x44\n\x10\x45ndCommunication\x12\x17.communicationsapi.Void\x1a\x17.communicationsapi.Void\x12\x45\n\x07Publish\x12!.communicationsapi.PublishPayload\x1a\x17.communicationsapi.Void\x12@\n\tSubscribe\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12\x42\n\x0bUnsubscribe\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12L\n\x0eGetSubscribers\x12\x1a.communicationsapi.Channel\x1a\x1e.communicationsapi.Subscribers\x12R\n\rHasSubscriber\x12\x1d.communicationsapi.Subscriber\x1a\".communicationsapi.BooleanResponse\x12>\n\x0bSendMessage\x12\x16.communicationsapi.Msg\x1a\x17.communicationsapi.Void\x12H\n\x0cLocatePeerId\x12\x1d.communicationsapi.RskAddress\x1a\x19.communicationsapi.PeerId\x12U\n\x15\x43reateTopicWithPeerId\x12\x19.communicationsapi.PeerId\x1a\x1f.communicationsapi.Notification0\x01\x12]\n\x19\x43reateTopicWithRskAddress\x12\x1d.communicationsapi.RskAddress\x1a\x1f.communicationsapi.Notification0\x01\x12\x41\n\nCloseTopic\x12\x1a.communicationsapi.Channel\x1a\x17.communicationsapi.Void\x12P\n\x12SendMessageToTopic\x12!.communicationsapi.PublishPayload\x1a\x17.communicationsapi.Void\x12X\n\x17SendMessageToRskAddress\x12$.communicationsapi.RskAddressPublish\x1a\x17.communicationsapi.Void\x12G\n\rUpdateAddress\x12\x1d.communicationsapi.RskAddress\x1a\x17.communicationsapi.Voidb\x06proto3'
 )
 
 
@@ -231,6 +231,45 @@ _PUBLISHPAYLOAD = _descriptor.Descriptor(
 )
 
 
+_RSKADDRESSPUBLISH = _descriptor.Descriptor(
+  name='RskAddressPublish',
+  full_name='communicationsapi.RskAddressPublish',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='address', full_name='communicationsapi.RskAddressPublish.address', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='message', full_name='communicationsapi.RskAddressPublish.message', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=292,
+  serialized_end=369,
+)
+
+
 _SUBSCRIBERS = _descriptor.Descriptor(
   name='Subscribers',
   full_name='communicationsapi.Subscribers',
@@ -258,8 +297,8 @@ _SUBSCRIBERS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=292,
-  serialized_end=321,
+  serialized_start=371,
+  serialized_end=400,
 )
 
 
@@ -297,8 +336,8 @@ _SUBSCRIBER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=323,
-  serialized_end=396,
+  serialized_start=402,
+  serialized_end=475,
 )
 
 
@@ -329,8 +368,8 @@ _BOOLEANRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=398,
-  serialized_end=430,
+  serialized_start=477,
+  serialized_end=509,
 )
 
 
@@ -415,8 +454,8 @@ _NOTIFICATION = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=433,
-  serialized_end=982,
+  serialized_start=512,
+  serialized_end=1061,
 )
 
 
@@ -471,8 +510,8 @@ _PEERNEWMSG = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=984,
-  serialized_end=1107,
+  serialized_start=1063,
+  serialized_end=1186,
 )
 
 
@@ -534,8 +573,8 @@ _PEERCHANNELINVITE = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1110,
-  serialized_end=1258,
+  serialized_start=1189,
+  serialized_end=1337,
 )
 
 
@@ -592,8 +631,8 @@ _PEERSIGNATUREREQUEST = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1260,
-  serialized_end=1371,
+  serialized_start=1339,
+  serialized_end=1450,
 )
 
 
@@ -650,8 +689,8 @@ _PEERSIGNATURERESPONSE = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1373,
-  serialized_end=1494,
+  serialized_start=1452,
+  serialized_end=1573,
 )
 
 
@@ -708,8 +747,8 @@ _CHANNELNEWDATA = _descriptor.Descriptor(
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1496,
-  serialized_end=1614,
+  serialized_start=1575,
+  serialized_end=1693,
 )
 
 
@@ -747,8 +786,8 @@ _CHANNELPEERLEFT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1616,
-  serialized_end=1694,
+  serialized_start=1695,
+  serialized_end=1773,
 )
 
 
@@ -786,8 +825,8 @@ _CHANNELPEERJOINED = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1696,
-  serialized_end=1776,
+  serialized_start=1775,
+  serialized_end=1855,
 )
 
 
@@ -825,8 +864,8 @@ _SERVERNOTIFICATION = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1778,
-  serialized_end=1837,
+  serialized_start=1857,
+  serialized_end=1916,
 )
 
 
@@ -864,12 +903,13 @@ _SUBSCRIBEERROR = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1839,
-  serialized_end=1916,
+  serialized_start=1918,
+  serialized_end=1995,
 )
 
 _PUBLISHPAYLOAD.fields_by_name['topic'].message_type = _CHANNEL
 _PUBLISHPAYLOAD.fields_by_name['message'].message_type = _MSG
+_RSKADDRESSPUBLISH.fields_by_name['message'].message_type = _MSG
 _SUBSCRIBER.fields_by_name['channel'].message_type = _CHANNEL
 _NOTIFICATION.fields_by_name['peerNewMsg'].message_type = _PEERNEWMSG
 _NOTIFICATION.fields_by_name['peerChannelInvite'].message_type = _PEERCHANNELINVITE
@@ -936,6 +976,7 @@ DESCRIPTOR.message_types_by_name['PeerId'] = _PEERID
 DESCRIPTOR.message_types_by_name['Void'] = _VOID
 DESCRIPTOR.message_types_by_name['Msg'] = _MSG
 DESCRIPTOR.message_types_by_name['PublishPayload'] = _PUBLISHPAYLOAD
+DESCRIPTOR.message_types_by_name['RskAddressPublish'] = _RSKADDRESSPUBLISH
 DESCRIPTOR.message_types_by_name['Subscribers'] = _SUBSCRIBERS
 DESCRIPTOR.message_types_by_name['Subscriber'] = _SUBSCRIBER
 DESCRIPTOR.message_types_by_name['BooleanResponse'] = _BOOLEANRESPONSE
@@ -992,6 +1033,13 @@ PublishPayload = _reflection.GeneratedProtocolMessageType('PublishPayload', (_me
   # @@protoc_insertion_point(class_scope:communicationsapi.PublishPayload)
   })
 _sym_db.RegisterMessage(PublishPayload)
+
+RskAddressPublish = _reflection.GeneratedProtocolMessageType('RskAddressPublish', (_message.Message,), {
+  'DESCRIPTOR' : _RSKADDRESSPUBLISH,
+  '__module__' : 'api_pb2'
+  # @@protoc_insertion_point(class_scope:communicationsapi.RskAddressPublish)
+  })
+_sym_db.RegisterMessage(RskAddressPublish)
 
 Subscribers = _reflection.GeneratedProtocolMessageType('Subscribers', (_message.Message,), {
   'DESCRIPTOR' : _SUBSCRIBERS,
@@ -1093,8 +1141,8 @@ _COMMUNICATIONSAPI = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1919,
-  serialized_end=3014,
+  serialized_start=1998,
+  serialized_end=3183,
   methods=[
   _descriptor.MethodDescriptor(
     name='ConnectToCommunicationsNode',
@@ -1227,9 +1275,19 @@ _COMMUNICATIONSAPI = _descriptor.ServiceDescriptor(
     create_key=_descriptor._internal_create_key,
   ),
   _descriptor.MethodDescriptor(
+    name='SendMessageToRskAddress',
+    full_name='communicationsapi.CommunicationsApi.SendMessageToRskAddress',
+    index=13,
+    containing_service=None,
+    input_type=_RSKADDRESSPUBLISH,
+    output_type=_VOID,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
     name='UpdateAddress',
     full_name='communicationsapi.CommunicationsApi.UpdateAddress',
-    index=13,
+    index=14,
     containing_service=None,
     input_type=_RSKADDRESS,
     output_type=_VOID,

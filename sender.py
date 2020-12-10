@@ -3,7 +3,7 @@ import sys
 from grpc import insecure_channel
 from pynput.keyboard import Key, Listener
 
-from api_pb2 import RskAddress, Channel, PublishPayload, Msg
+from api_pb2 import RskAddress, Channel, RskAddressPublish, Msg
 from api_pb2_grpc import CommunicationsApiStub
 
 
@@ -30,9 +30,9 @@ def run(rif_comms_node_address, rsk_address):
 
         def on_release(key):
             if key == Key.space:
-                stub.SendMessageToTopic(
-                    PublishPayload(
-                        topic=Channel(channelId=topic_id),
+                stub.SendMessageToRskAddress(
+                    RskAddressPublish(
+                        address=rsk_address,
                         message=Msg(payload=str.encode("hey"))
                     )
                 )

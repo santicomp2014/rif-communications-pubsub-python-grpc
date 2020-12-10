@@ -2,7 +2,7 @@ import sys
 
 from grpc import insecure_channel
 
-from api_pb2 import RskAddress, Msg, PublishPayload, Channel
+from api_pb2 import RskAddress, Msg, PublishPayload, Channel, RskAddressPublish
 from api_pb2_grpc import CommunicationsApiStub
 
 
@@ -36,9 +36,9 @@ def run(rif_comms_node_address, rsk_addr_to_use):
             except KeyboardInterrupt:
                 print("halting")
 
-                stub.SendMessageToTopic(
-                    PublishPayload(
-                        topic=Channel(channelId=topic_id),
+                stub.SendMessageToRskAddress(
+                    RskAddressPublish(
+                        address=rsk_addr_to_use,
                         message=Msg(payload=str.encode("bye"))
                     )
                 )
