@@ -4,7 +4,7 @@ from grpc import insecure_channel
 
 from api_pb2 import RskAddress, PublishPayload, Channel, Msg, RskAddressPublish
 from api_pb2_grpc import CommunicationsApiStub
-from utils import subscribe_to_topic, unsubscribe_from_topic, notification_to_message
+from utils import subscribe_to_topic, notification_to_message, unsubscribe_from_topic
 
 
 def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str):
@@ -48,8 +48,8 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
                     )
                 )
 
-                unsubscribe_from_topic(stub, our_topic_id)
-                unsubscribe_from_topic(stub, peer_topic_id)
+                unsubscribe_from_topic(stub, our_rsk_address)
+                unsubscribe_from_topic(stub, peer_rsk_address)
 
                 exit()
 

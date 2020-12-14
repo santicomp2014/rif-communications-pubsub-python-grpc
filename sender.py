@@ -6,6 +6,7 @@ from pynput.keyboard import Key, Listener
 from api_pb2 import RskAddress, Channel, RskAddressPublish, Msg
 from api_pb2_grpc import CommunicationsApiStub
 
+from utils import unsubscribe_from_topic
 
 def run(rif_comms_node_address, rsk_address):
     with insecure_channel(rif_comms_node_address) as channel:
@@ -56,7 +57,7 @@ def run(rif_comms_node_address, rsk_address):
                 print("halting")
 
                 print("closing topic", topic_id)
-                stub.CloseTopic(Channel(channelId=topic_id))
+                unsubscribe_from_topic(stub, rsk_address)
                 exit()
 
 

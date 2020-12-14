@@ -2,9 +2,9 @@ import sys
 
 from grpc import insecure_channel
 
-from api_pb2 import RskAddress, Msg, PublishPayload, Channel, RskAddressPublish
+from api_pb2 import RskAddress, Msg, Channel, RskAddressPublish
 from api_pb2_grpc import CommunicationsApiStub
-
+from utils import unsubscribe_from_topic
 
 def run(rif_comms_node_address, rsk_addr_to_use):
     with insecure_channel(rif_comms_node_address) as channel:
@@ -44,7 +44,7 @@ def run(rif_comms_node_address, rsk_addr_to_use):
                 )
 
                 print("closing topic", topic_id)
-                stub.CloseTopic(Channel(channelId=topic_id))
+                unsubscribe_from_topic(stub, rsk_addr_to_use)
                 exit()
 
 
