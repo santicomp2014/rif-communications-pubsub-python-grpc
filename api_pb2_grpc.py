@@ -51,6 +51,11 @@ class CommunicationsApiStub(object):
                 request_serializer=api__pb2.Subscriber.SerializeToString,
                 response_deserializer=api__pb2.BooleanResponse.FromString,
                 )
+        self.IsSubscribedToRskAddress = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/IsSubscribedToRskAddress',
+                request_serializer=api__pb2.RskAddress.SerializeToString,
+                response_deserializer=api__pb2.BooleanResponse.FromString,
+                )
         self.SendMessage = channel.unary_unary(
                 '/communicationsapi.CommunicationsApi/SendMessage',
                 request_serializer=api__pb2.Msg.SerializeToString,
@@ -71,9 +76,9 @@ class CommunicationsApiStub(object):
                 request_serializer=api__pb2.RskAddress.SerializeToString,
                 response_deserializer=api__pb2.Notification.FromString,
                 )
-        self.CloseTopic = channel.unary_unary(
-                '/communicationsapi.CommunicationsApi/CloseTopic',
-                request_serializer=api__pb2.Channel.SerializeToString,
+        self.CloseTopicWithRskAddress = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/CloseTopicWithRskAddress',
+                request_serializer=api__pb2.RskAddress.SerializeToString,
                 response_deserializer=api__pb2.Void.FromString,
                 )
         self.SendMessageToTopic = channel.unary_unary(
@@ -147,6 +152,13 @@ class CommunicationsApiServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def IsSubscribedToRskAddress(self, request, context):
+        """Query if a subscriber exists in a participating channel
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def SendMessage(self, request, context):
         """Send a direct message to a peer
         """
@@ -176,7 +188,7 @@ class CommunicationsApiServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
-    def CloseTopic(self, request, context):
+    def CloseTopicWithRskAddress(self, request, context):
         """Close Topic for a specific topicID
         """
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -242,6 +254,11 @@ def add_CommunicationsApiServicer_to_server(servicer, server):
                     request_deserializer=api__pb2.Subscriber.FromString,
                     response_serializer=api__pb2.BooleanResponse.SerializeToString,
             ),
+            'IsSubscribedToRskAddress': grpc.unary_unary_rpc_method_handler(
+                    servicer.IsSubscribedToRskAddress,
+                    request_deserializer=api__pb2.RskAddress.FromString,
+                    response_serializer=api__pb2.BooleanResponse.SerializeToString,
+            ),
             'SendMessage': grpc.unary_unary_rpc_method_handler(
                     servicer.SendMessage,
                     request_deserializer=api__pb2.Msg.FromString,
@@ -262,9 +279,9 @@ def add_CommunicationsApiServicer_to_server(servicer, server):
                     request_deserializer=api__pb2.RskAddress.FromString,
                     response_serializer=api__pb2.Notification.SerializeToString,
             ),
-            'CloseTopic': grpc.unary_unary_rpc_method_handler(
-                    servicer.CloseTopic,
-                    request_deserializer=api__pb2.Channel.FromString,
+            'CloseTopicWithRskAddress': grpc.unary_unary_rpc_method_handler(
+                    servicer.CloseTopicWithRskAddress,
+                    request_deserializer=api__pb2.RskAddress.FromString,
                     response_serializer=api__pb2.Void.SerializeToString,
             ),
             'SendMessageToTopic': grpc.unary_unary_rpc_method_handler(
@@ -414,6 +431,23 @@ class CommunicationsApi(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
+    def IsSubscribedToRskAddress(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/IsSubscribedToRskAddress',
+            api__pb2.RskAddress.SerializeToString,
+            api__pb2.BooleanResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
     def SendMessage(request,
             target,
             options=(),
@@ -482,7 +516,7 @@ class CommunicationsApi(object):
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
-    def CloseTopic(request,
+    def CloseTopicWithRskAddress(request,
             target,
             options=(),
             channel_credentials=None,
@@ -492,8 +526,8 @@ class CommunicationsApi(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/CloseTopic',
-            api__pb2.Channel.SerializeToString,
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/CloseTopicWithRskAddress',
+            api__pb2.RskAddress.SerializeToString,
             api__pb2.Void.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
