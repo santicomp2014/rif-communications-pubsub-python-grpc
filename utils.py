@@ -23,22 +23,14 @@ def subscribe_to_topic(stub: CommunicationsApiStub, rsk_address: str) -> (Notifi
     return topic, topic_id
 
 
-def is_subscribed_to(stub: CommunicationsApiStub, subscriber_address: str, topic_address: str) -> bool:
-    print("\nchecking subscription for", subscriber_address, "to topic", topic_address)
-
-    our_peer_id = get_peer_id(stub, subscriber_address)
-    topic_id = get_peer_id(stub, topic_address)
-    return stub.HasSubscriber(
-        Subscriber(
-            peerId=topic_id,
-            channel=Channel(channelId=topic_id)
-        )
-    ).value
+def is_subscribed_to(stub: CommunicationsApiStub, address: str) -> bool:
+    print("\nchecking subscription to", address)
+    return stub.IsSubscribedToRskAddress(RskAddress(address=address)).value
 
 
-def unsubscribe_from_topic(stub: CommunicationsApiStub, topic_id: str):
-    print("\nunsubscribing from topic", topic_id)
-    stub.CloseTopic(Channel(channelId=topic_id))
+def unsubscribe_from_topic(stub: CommunicationsApiStub, address: str):
+    print("\nunsubscribing from address", address)
+    stub.CloseTopicWithRskAddress(RskAddress(address=address))
 
 
 def get_peer_id(stub: CommunicationsApiStub, rsk_address: str) -> str:

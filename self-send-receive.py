@@ -2,7 +2,7 @@ import sys
 
 from grpc import insecure_channel
 
-from api_pb2 import RskAddress, Msg, PublishPayload, Channel
+from api_pb2 import RskAddress, Msg, Channel, RskAddressPublish
 from api_pb2_grpc import CommunicationsApiStub
 from utils import notification_to_message
 
@@ -23,15 +23,13 @@ def run(rif_comms_node_address, our_rsk_address):
         for response in our_topic:
             print("received message:", notification_to_message(response))
 
-            if response.channelPeerJoined.peerId:
-                our_topic_id = response.channelPeerJoined.peerId
             if (response.subscribeError.reason):
                 print("Error Subscribing",response.subscribeError.reason)
                 exit()    
             input("press enter to say \"ping\" on our own topic, or ctrl+c to exit")
-            stub.SendMessageToTopic(
-                PublishPayload(
-                    topic=Channel(channelId=our_topic_id),
+            stub.SendMessageToRskAddress(
+                RskAddressPublish(
+                    receiver=RskAddress(address=our_rsk_address),
                     message=Msg(payload=str.encode("ping (" + str(i) + ")"))
                 )
             )
