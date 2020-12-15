@@ -81,6 +81,11 @@ class CommunicationsApiStub(object):
                 request_serializer=api__pb2.PublishPayload.SerializeToString,
                 response_deserializer=api__pb2.Void.FromString,
                 )
+        self.SendMessageToRskAddress = channel.unary_unary(
+                '/communicationsapi.CommunicationsApi/SendMessageToRskAddress',
+                request_serializer=api__pb2.RskAddressPublish.SerializeToString,
+                response_deserializer=api__pb2.Void.FromString,
+                )
         self.UpdateAddress = channel.unary_unary(
                 '/communicationsapi.CommunicationsApi/UpdateAddress',
                 request_serializer=api__pb2.RskAddress.SerializeToString,
@@ -185,6 +190,13 @@ class CommunicationsApiServicer(object):
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
+    def SendMessageToRskAddress(self, request, context):
+        """Send message to topic binded to an specific RSK address
+        """
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def UpdateAddress(self, request, context):
         """Update RSK Address after invitation
         """
@@ -258,6 +270,11 @@ def add_CommunicationsApiServicer_to_server(servicer, server):
             'SendMessageToTopic': grpc.unary_unary_rpc_method_handler(
                     servicer.SendMessageToTopic,
                     request_deserializer=api__pb2.PublishPayload.FromString,
+                    response_serializer=api__pb2.Void.SerializeToString,
+            ),
+            'SendMessageToRskAddress': grpc.unary_unary_rpc_method_handler(
+                    servicer.SendMessageToRskAddress,
+                    request_deserializer=api__pb2.RskAddressPublish.FromString,
                     response_serializer=api__pb2.Void.SerializeToString,
             ),
             'UpdateAddress': grpc.unary_unary_rpc_method_handler(
@@ -494,6 +511,23 @@ class CommunicationsApi(object):
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/SendMessageToTopic',
             api__pb2.PublishPayload.SerializeToString,
+            api__pb2.Void.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def SendMessageToRskAddress(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/SendMessageToRskAddress',
+            api__pb2.RskAddressPublish.SerializeToString,
             api__pb2.Void.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

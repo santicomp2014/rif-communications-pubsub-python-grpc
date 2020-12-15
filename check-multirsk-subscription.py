@@ -4,9 +4,9 @@ import threading
 
 from grpc import insecure_channel
 
-from api_pb2 import RskAddress,Channel, RskAddress,PublishPayload,Msg
+from api_pb2 import RskAddress,Channel, RskAddress,RskAddressPublish,Msg
 from api_pb2_grpc import CommunicationsApiStub
-from utils import subscribe_to_topic, let_user_pick, is_subscribed_to
+from utils import subscribe_to_topic, let_user_pick, is_subscribed_to, notification_to_message
 
 addresses = [
     "0x8cb891510dF75C223C53f910A98c3b61B9083c3B",
@@ -14,17 +14,12 @@ addresses = [
     "0xbE165fe06c03e4387F79615b7A0b79d535e8D325",
 ]
 
-#me conecto con un addr
-#me subscribo al mismo addr
-#hago un publish en paralaleo luego de x tiempo
-#me fijo que en el otro nodo no le llegue el mensaje solo a el
-
-def publish(stub,topic_id):
+def publish(stub,rskaddress,our_rsk_address):
     
-    stub.SendMessageToTopic(
-        PublishPayload(
-            topic=Channel(channelId=topic_id),
-            message=Msg(payload=str.encode("hey"))
+    stub.SendMessageToRskAddress(
+        RskAddressPublish(
+            receiver=RskAddress(address=rskaddress),
+            message=Msg(payload=str.encode("OUR ADDRESS"+our_rsk_address))
         )
     )
 
@@ -45,12 +40,12 @@ def run(rif_comms_node_address: str, our_rsk_address: str):
                 ) - 1
                
         (topic,topic_id) = subscribe_to_topic(stub, addresses[sub_option])
-        threading.Timer(10.0, publish,[stub,topic_id]).start()
+        threading.Timer(10.0, publish,[stub,addresses[sub_option],our_rsk_addr.address]).start()
         # subscribe to topics
         while True:
             try:        
                 for topic_message in topic:
-                    print("got response %s for topic %s" % (topic_message, topic))
+                    print("\ngot message \"%s\" for topic %s" % (notification_to_message(topic_message), topic))
             except KeyboardInterrupt:
                 print("\n")
                 break
