@@ -26,7 +26,10 @@ service CommunicationsApi {
 
     //Query if a subscriber exists in a participating channel
     rpc HasSubscriber(Subscriber) returns (BooleanResponse);
-    
+
+    //Query if a subscriber exists in a participating channel
+    rpc IsSubscribedToRskAddress(RskAddress) returns (BooleanResponse);
+
     //Send a direct message to a peer
     rpc SendMessage(Msg) returns (Void);
 
@@ -40,10 +43,13 @@ service CommunicationsApi {
     rpc CreateTopicWithRskAddress(RskAddress) returns (stream Notification);
 
     //Close Topic for a specific topicID
-    rpc CloseTopic (Channel) returns (Void);
+    rpc CloseTopicWithRskAddress (RskAddress) returns (Void);
 
     //Send Message to Specified Topic
     rpc SendMessageToTopic(PublishPayload) returns (Void);
+
+    // Send message to topic binded to an specific RSK address
+    rpc SendMessageToRskAddress(RskAddressPublish) returns (Void);
 
     //Update RSK Address after invitation
     rpc UpdateAddress(RskAddress) returns (Void);
@@ -59,6 +65,7 @@ message RskAddress {
     string address = 1;
     bool exclusive= 2;
 }
+
 message PeerId {
     string address = 1;
     bool exclusive= 2;
@@ -79,6 +86,10 @@ message PublishPayload {
     Msg message = 2;
 }
 
+message RskAddressPublish {
+    RskAddress receiver = 1;
+    Msg message = 2;
+}
 
 // Set of peerIDs subscribed to a specific channel
 message Subscribers {
