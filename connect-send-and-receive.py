@@ -25,6 +25,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
 
         stub.SendMessageToRskAddress(
             RskAddressPublish(
+                sender=RskAddress(address=our_rsk_address),
                 receiver=RskAddress(address=peer_rsk_address),
                 message=Msg(payload=str.encode("hello from " + our_rsk_address))
             )
@@ -36,13 +37,14 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
                 print("press ctrl+c to stop listening and say \"goodbye\" to peer topic " + peer_topic_id)
 
                 for topic_message in our_topic:
-                    print("\ngot message \"%s\" for topic %s" % (notification_to_message(topic_message), our_topic_id))
+                    print("\ngot message \"%s\" for topic %s from %s" % (notification_to_message(topic_message), our_topic_id, topic_message.channelNewData.sender.address))
 
             except KeyboardInterrupt:
                 print("\nsaying \"goodbye\" to peer topic " + peer_topic_id)
 
                 stub.SendMessageToRskAddress(
                     RskAddressPublish(
+                        sender=RskAddress(address=our_rsk_address),
                         receiver=RskAddress(address=peer_rsk_address),
                         message=Msg(payload=str.encode("goodbye from " + our_rsk_address))
                     )

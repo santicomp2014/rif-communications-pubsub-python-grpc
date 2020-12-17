@@ -38,6 +38,7 @@ def run(rif_comms_node_address, rsk_addr_to_use):
 
                 stub.SendMessageToRskAddress(
                     RskAddressPublish(
+                        sender=RskAddress(address=rsk_addr_to_use),
                         receiver=RskAddress(address=rsk_addr_to_use),
                         message=Msg(payload=str.encode("bye"))
                     )

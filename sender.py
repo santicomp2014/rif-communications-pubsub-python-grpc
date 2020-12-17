@@ -8,11 +8,11 @@ from api_pb2_grpc import CommunicationsApiStub
 
 from utils import unsubscribe_from_topic
 
-def run(rif_comms_node_address, rsk_address):
+def run(rif_comms_node_address, sender_rsk_address, receiver_rsk_address):
     with insecure_channel(rif_comms_node_address) as channel:
         print("connecting to comms node at", rif_comms_node_address)
         stub = CommunicationsApiStub(channel)
-        rsk_addr = RskAddress(address=rsk_address)
+        rsk_addr = RskAddress(address=receiver_rsk_address)
 
         topic_id = ""
         print("subscribing to topic", topic_id)
@@ -33,7 +33,8 @@ def run(rif_comms_node_address, rsk_address):
             if key == Key.space:
                 stub.SendMessageToRskAddress(
                     RskAddressPublish(
-                        receiver=RskAddress(address=rsk_address),
+                        sender=RskAddress(address=sender_rsk_address),
+                        receiver=RskAddress(address=receiver_rsk_address),
                         message=Msg(payload=str.encode("hey"))
                     )
                 )
@@ -57,11 +58,12 @@ def run(rif_comms_node_address, rsk_address):
                 print("halting")
 
                 print("closing topic", topic_id)
-                unsubscribe_from_topic(stub, rsk_address)
+                unsubscribe_from_topic(stub, receiver_rsk_address)
                 exit()
 
 
 if __name__ == "__main__":
     node_address = sys.argv[1]
-    rsk_address = sys.argv[2]
-    run(node_address, rsk_address)
+    sender_rsk_address = sys.argv[2]
+    receiver_rsk_address = sys.argv[3]
+    run(node_address, sender_rsk_address, receiver_rsk_address)

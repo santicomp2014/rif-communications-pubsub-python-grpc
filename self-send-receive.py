@@ -29,6 +29,7 @@ def run(rif_comms_node_address, our_rsk_address):
             input("press enter to say \"ping\" on our own topic, or ctrl+c to exit")
             stub.SendMessageToRskAddress(
                 RskAddressPublish(
+                    sender=RskAddress(address=our_rsk_address),
                     receiver=RskAddress(address=our_rsk_address),
                     message=Msg(payload=str.encode("ping (" + str(i) + ")"))
                 )
