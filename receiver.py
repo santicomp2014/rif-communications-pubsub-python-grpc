@@ -6,7 +6,7 @@ from api_pb2 import RskAddress, Msg, Channel, RskAddressPublish
 from api_pb2_grpc import CommunicationsApiStub
 from utils import unsubscribe_from_topic
 
-def run(rif_comms_node_address, rsk_addr_to_use,rsk_addr_sender):
+def run(rif_comms_node_address,our_rsk_address,rsk_addr_to_use):
     with insecure_channel(rif_comms_node_address) as channel:
         print("connecting to comms node at", rif_comms_node_address)
         stub = CommunicationsApiStub(channel)
@@ -38,7 +38,7 @@ def run(rif_comms_node_address, rsk_addr_to_use,rsk_addr_sender):
 
                 stub.SendMessageToRskAddress(
                     RskAddressPublish(
-                        sender=RskAddress(address=rsk_addr_sender),
+                        sender=RskAddress(address=our_rsk_address),
                         receiver=RskAddress(address=rsk_addr_to_use),
                         message=Msg(payload=str.encode("bye"))
                     )
@@ -53,4 +53,4 @@ if __name__ == "__main__":
     node_address = sys.argv[1]
     rsk_address = sys.argv[2]
     our_rsk_address = sys.argv[3]
-    run(node_address, rsk_address,our_rsk_address)
+    run(node_address,our_rsk_address,rsk_address)

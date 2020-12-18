@@ -8,7 +8,7 @@ from api_pb2_grpc import CommunicationsApiStub
 
 from utils import unsubscribe_from_topic
 
-def run(rif_comms_node_address, rsk_address,our_rsk_address):
+def run(rif_comms_node_address,our_rsk_address,rsk_address):
     with insecure_channel(rif_comms_node_address) as channel:
         print("connecting to comms node at", rif_comms_node_address)
         stub = CommunicationsApiStub(channel)
@@ -66,4 +66,4 @@ if __name__ == "__main__":
     node_address = sys.argv[1]
     rsk_address = sys.argv[2]
     our_rsk_address = sys.argv[3]
-    run(node_address, rsk_address,our_rsk_address)
+    run(node_address,our_rsk_address,rsk_address)
