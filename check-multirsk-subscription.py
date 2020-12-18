@@ -18,6 +18,7 @@ def publish(stub,rskaddress,our_rsk_address):
     
     stub.SendMessageToRskAddress(
         RskAddressPublish(
+            sender=RskAddress(address=our_rsk_address),
             receiver=RskAddress(address=rskaddress),
             message=Msg(payload=str.encode("OUR ADDRESS"+our_rsk_address))
         )
