@@ -12,20 +12,6 @@ def run(rif_comms_node_address, sender_rsk_address, receiver_rsk_address):
     with insecure_channel(rif_comms_node_address) as channel:
         print("connecting to comms node at", rif_comms_node_address)
         stub = CommunicationsApiStub(channel)
-        rsk_addr = RskAddress(address=receiver_rsk_address)
-
-        topic_id = ""
-        print("subscribing to topic", topic_id)
-        topic = stub.CreateTopicWithRskAddress(rsk_addr)
-        for response in topic:
-            if (response.channelPeerJoined.peerId):
-                topic_id = response.channelPeerJoined.peerId
-                print("peer ID for rsk address is", topic_id)
-                break
-            if (response.subscribeError.reason):
-                print("Error Subscribing",response.subscribeError.reason)
-                exit()
-            
 
         print("press space to send messages and esc to stop")
 
@@ -45,21 +31,10 @@ def run(rif_comms_node_address, sender_rsk_address, receiver_rsk_address):
         with Listener(on_release=on_release) as listener:
             listener.join()
 
-        print("done sending messages, now listening for messages")
+        print("done sending messages")
 
         # enter message receiving loop
-        while True:
-            try:
-                print("listening on topic", topic_id)
-                for response in topic:
-                    print("got response %s for topic %s" % (response, topic_id))
 
-            except KeyboardInterrupt:
-                print("halting")
-
-                print("closing topic", topic_id)
-                unsubscribe_from_topic(stub, receiver_rsk_address)
-                exit()
 
 
 if __name__ == "__main__":

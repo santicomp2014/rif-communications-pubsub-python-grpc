@@ -1,6 +1,6 @@
 import json
 
-from api_pb2 import RskAddress, Notification, Channel, Subscriber
+from api_pb2 import RskAddress, Notification, Channel, Subscriber, RskSubscription
 from api_pb2_grpc import CommunicationsApiStub
 
 
@@ -28,9 +28,13 @@ def is_subscribed_to(stub: CommunicationsApiStub, address: str) -> bool:
     return stub.IsSubscribedToRskAddress(RskAddress(address=address)).value
 
 
-def unsubscribe_from_topic(stub: CommunicationsApiStub, address: str):
+def unsubscribe_from_topic(stub: CommunicationsApiStub, address: str, subscriber: str):
     print("\nunsubscribing from address", address)
-    stub.CloseTopicWithRskAddress(RskAddress(address=address))
+    stub.CloseTopicWithRskAddress(
+        RskSubscription(
+            topic=RskAddress(address=address), subscriber=RskAddress(address=subscriber)
+        )
+    )
 
 
 def get_peer_id(stub: CommunicationsApiStub, rsk_address: str) -> str:
