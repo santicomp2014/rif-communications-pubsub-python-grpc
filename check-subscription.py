@@ -28,7 +28,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str):
                 sub_option = let_user_pick(
                     "\npick a REGISTERED address to subscribe to. press ctrl-c when done.", addresses
                 ) - 1
-                subscribe_to_topic(stub, addresses[sub_option])
+                subscribe_to_topic(stub, our_rsk_addr.address,  addresses[sub_option])
             except KeyboardInterrupt:
                 print("\n")
                 break

@@ -4,21 +4,22 @@ from api_pb2 import RskAddress, Notification, Channel, Subscriber, RskSubscripti
 from api_pb2_grpc import CommunicationsApiStub
 
 
-def subscribe_to_topic(stub: CommunicationsApiStub, rsk_address: str) -> (Notification, str):
-    rsk_addr = RskAddress(address=rsk_address)
+def subscribe_to_topic(stub: CommunicationsApiStub, subscriber_address: str, topic_address: str) -> (Notification, str):
+    topic = RskAddress(address=topic_address)
+    subscriber = RskAddress(address=subscriber_address)
 
-    print("\nsubscribing to topic for rsk address", rsk_address)
-    topic = stub.CreateTopicWithRskAddress(rsk_addr)
+    print("\nsubscribing to topic for rsk address", topic_address)
+    topic = stub.CreateTopicWithRskAddress(RskSubscription(topic=topic, subscriber=subscriber))
 
     topic_id = ""
     for response in topic:
         if response.channelPeerJoined.peerId:
             topic_id = response.channelPeerJoined.peerId
             break
-        if (response.subscribeError.reason):
-                raise Exception(("Error Subscribing",response.subscribeError.reason))
+        if response.subscribeError.reason:
+            raise Exception(("Error Subscribing",response.subscribeError.reason))
 
-    print("topic id for rsk address", rsk_address, "is:\n" + topic_id)
+    print("topic id for rsk address", topic_address, "is:\n" + topic_id)
 
     return topic, topic_id
 

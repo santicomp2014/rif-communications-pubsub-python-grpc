@@ -17,11 +17,9 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
         # TODO: how can we keep this from blocking without a var assignment?
         notification = stub.ConnectToCommunicationsNode(our_rsk_addr)
 
-        our_topic, our_topic_id = subscribe_to_topic(stub, our_rsk_address)
+        our_topic, our_topic_id = subscribe_to_topic(stub, our_rsk_address, our_rsk_address)
 
         input("\npress enter to say \"hello\" to peer topic for rsk address " + peer_rsk_address)
-
-        peer_topic, peer_topic_id = subscribe_to_topic(stub, peer_rsk_address)
 
         stub.SendMessageToRskAddress(
             RskAddressPublish(
