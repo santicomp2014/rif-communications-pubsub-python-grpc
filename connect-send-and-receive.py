@@ -15,13 +15,11 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
         our_rsk_addr = RskAddress(address=our_rsk_address)
         print("registering our rsk address", our_rsk_addr.address)
         # TODO: how can we keep this from blocking without a var assignment?
-        notification = stub.ConnectToCommunicationsNode(our_rsk_addr)
+        stub.ConnectToCommunicationsNode(our_rsk_addr)
 
-        our_topic, our_topic_id = subscribe_to_topic(stub, our_rsk_address)
+        our_topic, our_topic_id = subscribe_to_topic(stub, our_rsk_address, our_rsk_address)
 
         input("\npress enter to say \"hello\" to peer topic for rsk address " + peer_rsk_address)
-
-        peer_topic, peer_topic_id = subscribe_to_topic(stub, peer_rsk_address)
 
         stub.SendMessageToRskAddress(
             RskAddressPublish(
@@ -34,13 +32,13 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
         while True:
             try:
                 print("\nlistening on our topic", our_topic_id)
-                print("press ctrl+c to stop listening and say \"goodbye\" to peer topic " + peer_topic_id)
+                print("press ctrl+c to stop listening and say \"goodbye\" to peer address " + peer_rsk_address)
 
                 for topic_message in our_topic:
                     print("\ngot message \"%s\" for topic %s from %s" % (notification_to_message(topic_message), our_topic_id, topic_message.channelNewData.sender.address))
 
             except KeyboardInterrupt:
-                print("\nsaying \"goodbye\" to peer topic " + peer_topic_id)
+                print("\nsaying \"goodbye\" to peer address " + peer_rsk_address)
 
                 stub.SendMessageToRskAddress(
                     RskAddressPublish(
@@ -50,8 +48,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str, peer_rsk_address: str
                     )
                 )
 
-                unsubscribe_from_topic(stub, our_rsk_address)
-                unsubscribe_from_topic(stub, peer_rsk_address)
+                unsubscribe_from_topic(stub, our_rsk_address, our_rsk_address)
 
                 exit()
 

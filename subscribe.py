@@ -18,7 +18,7 @@ def run(our_comms_node_address: str, our_rsk_address: str, peer_comms_node_addre
 
         # TODO: this shouldn't be necessary
         print("self-subscribing our node")
-        subscribe_to_topic(stub, our_rsk_address)
+        subscribe_to_topic(stub, our_rsk_address, our_rsk_address)
 
     with insecure_channel(peer_comms_node_address) as channel:
         print("\nconnecting to comms node at", peer_comms_node_address)
@@ -26,11 +26,11 @@ def run(our_comms_node_address: str, our_rsk_address: str, peer_comms_node_addre
 
         peer_rsk_addr = RskAddress(address=peer_rsk_address)
         print("registering peer rsk address", peer_rsk_addr.address)
-        notification = stub.ConnectToCommunicationsNode(peer_rsk_addr)
+        stub.ConnectToCommunicationsNode(peer_rsk_addr)
 
         # TODO: this shouldn't be necessary
         print("self-subscribing peer node")
-        subscribe_to_topic(stub, peer_rsk_address)
+        subscribe_to_topic(stub, peer_rsk_address, peer_rsk_address)
 
         # subscribing to our topic from peer node
         print("\nfetching channel ID from peer")
