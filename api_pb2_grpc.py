@@ -16,7 +16,7 @@ class CommunicationsApiStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ConnectToCommunicationsNode = channel.unary_stream(
+        self.ConnectToCommunicationsNode = channel.unary_unary(
                 '/communicationsapi.CommunicationsApi/ConnectToCommunicationsNode',
                 request_serializer=api__pb2.RskAddress.SerializeToString,
                 response_deserializer=api__pb2.Notification.FromString,
@@ -219,7 +219,7 @@ class CommunicationsApiServicer(object):
 
 def add_CommunicationsApiServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ConnectToCommunicationsNode': grpc.unary_stream_rpc_method_handler(
+            'ConnectToCommunicationsNode': grpc.unary_unary_rpc_method_handler(
                     servicer.ConnectToCommunicationsNode,
                     request_deserializer=api__pb2.RskAddress.FromString,
                     response_serializer=api__pb2.Notification.SerializeToString,
@@ -322,7 +322,7 @@ class CommunicationsApi(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_stream(request, target, '/communicationsapi.CommunicationsApi/ConnectToCommunicationsNode',
+        return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/ConnectToCommunicationsNode',
             api__pb2.RskAddress.SerializeToString,
             api__pb2.Notification.FromString,
             options, channel_credentials,

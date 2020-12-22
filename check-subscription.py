@@ -20,7 +20,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str):
 
         our_rsk_addr = RskAddress(address=our_rsk_address)
         print("registering rsk address", our_rsk_addr.address)
-        notification = stub.ConnectToCommunicationsNode(our_rsk_addr)
+        stub.ConnectToCommunicationsNode(our_rsk_addr)
 
         # subscribe to topics
         while True:

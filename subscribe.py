@@ -26,7 +26,7 @@ def run(our_comms_node_address: str, our_rsk_address: str, peer_comms_node_addre
 
         peer_rsk_addr = RskAddress(address=peer_rsk_address)
         print("registering peer rsk address", peer_rsk_addr.address)
-        notification = stub.ConnectToCommunicationsNode(peer_rsk_addr)
+        stub.ConnectToCommunicationsNode(peer_rsk_addr)
 
         # TODO: this shouldn't be necessary
         print("self-subscribing peer node")

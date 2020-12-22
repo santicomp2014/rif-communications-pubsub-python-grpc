@@ -2,9 +2,10 @@ import sys
 
 from grpc import insecure_channel
 
-from api_pb2 import RskAddress, Msg, Channel, RskAddressPublish, RskSubscription
+from api_pb2 import RskAddress, Msg, RskAddressPublish, RskSubscription
 from api_pb2_grpc import CommunicationsApiStub
 from utils import unsubscribe_from_topic
+
 
 def run(rif_comms_node_address, our_addr, topic_addr):
     with insecure_channel(rif_comms_node_address) as channel:
@@ -14,7 +15,7 @@ def run(rif_comms_node_address, our_addr, topic_addr):
         rsk_addr = RskAddress(address=topic_addr)
         our_rsk_addr = RskAddress(address=our_addr)
         print("registering rsk address", rsk_addr.address)
-        notification = stub.ConnectToCommunicationsNode(rsk_addr)
+        stub.ConnectToCommunicationsNode(rsk_addr)
 
         topic_id = ""
         print("creating topic for rsk address", rsk_addr.address, ". Subscriber is:", our_rsk_addr.address)

@@ -14,7 +14,7 @@ def run(rif_comms_node_address, our_rsk_address):
 
         our_rsk_addr = RskAddress(address=our_rsk_address)
         print("registering our rsk address", our_rsk_addr.address)
-        notification = stub.ConnectToCommunicationsNode(our_rsk_addr)
+        stub.ConnectToCommunicationsNode(our_rsk_addr)
 
         print("creating topic for our address", our_rsk_addr.address)
         our_topic = stub.CreateTopicWithRskAddress(RskSubscription(subscriber=our_rsk_addr, topic=our_rsk_addr))
