@@ -41,7 +41,7 @@ def run(rif_comms_node_address: str, our_rsk_address: str):
                 ) - 1
                 print(
                     "\nis\n    ", our_rsk_address, "\nsubscribed to\n    ", addresses[sub_check_option],
-                    "\n?", "\n→ " + str(is_subscribed_to(stub, addresses[sub_check_option]))
+                    "\n?", "\n→ " + str(is_subscribed_to(stub, our_rsk_addr.address, addresses[sub_check_option]))
                 )
             except KeyboardInterrupt:
                 exit()

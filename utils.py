@@ -24,9 +24,11 @@ def subscribe_to_topic(stub: CommunicationsApiStub, subscriber_address: str, top
     return topic, topic_id
 
 
-def is_subscribed_to(stub: CommunicationsApiStub, address: str) -> bool:
-    print("\nchecking subscription to", address)
-    return stub.IsSubscribedToRskAddress(RskAddress(address=address)).value
+def is_subscribed_to(stub: CommunicationsApiStub, subscriber_address:str, topic_address: str) -> bool:
+    print("\nchecking subscription from", subscriber_address ,"to", topic_address)
+    subscriber = RskAddress(address=subscriber_address)
+    topic = RskAddress(address=topic_address)
+    return stub.IsSubscribedToRskAddress(RskSubscription(subscriber=subscriber, topic=topic)).value
 
 
 def unsubscribe_from_topic(stub: CommunicationsApiStub, address: str, subscriber: str):

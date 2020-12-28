@@ -53,7 +53,7 @@ class CommunicationsApiStub(object):
                 )
         self.IsSubscribedToRskAddress = channel.unary_unary(
                 '/communicationsapi.CommunicationsApi/IsSubscribedToRskAddress',
-                request_serializer=api__pb2.RskAddress.SerializeToString,
+                request_serializer=api__pb2.RskSubscription.SerializeToString,
                 response_deserializer=api__pb2.BooleanResponse.FromString,
                 )
         self.SendMessage = channel.unary_unary(
@@ -256,7 +256,7 @@ def add_CommunicationsApiServicer_to_server(servicer, server):
             ),
             'IsSubscribedToRskAddress': grpc.unary_unary_rpc_method_handler(
                     servicer.IsSubscribedToRskAddress,
-                    request_deserializer=api__pb2.RskAddress.FromString,
+                    request_deserializer=api__pb2.RskSubscription.FromString,
                     response_serializer=api__pb2.BooleanResponse.SerializeToString,
             ),
             'SendMessage': grpc.unary_unary_rpc_method_handler(
@@ -442,7 +442,7 @@ class CommunicationsApi(object):
             timeout=None,
             metadata=None):
         return grpc.experimental.unary_unary(request, target, '/communicationsapi.CommunicationsApi/IsSubscribedToRskAddress',
-            api__pb2.RskAddress.SerializeToString,
+            api__pb2.RskSubscription.SerializeToString,
             api__pb2.BooleanResponse.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
