@@ -1,10 +1,10 @@
 import sys
 
-from grpc import insecure_channel
+from grpc import insecure_channel, RpcError
 
 from api_pb2 import RskAddress, Msg, RskAddressPublish, RskSubscription
 from api_pb2_grpc import CommunicationsApiStub
-from utils import unsubscribe_from_topic
+from utils import unsubscribe_from_topic, get_peer_id
 
 
 def run(rif_comms_node_address, our_addr, topic_addr):
@@ -16,18 +16,18 @@ def run(rif_comms_node_address, our_addr, topic_addr):
         our_rsk_addr = RskAddress(address=our_addr)
         print("registering rsk address", rsk_addr.address)
         stub.ConnectToCommunicationsNode(rsk_addr)
-
         topic_id = ""
         print("creating topic for rsk address", rsk_addr.address, ". Subscriber is:", our_rsk_addr.address)
         topic = stub.CreateTopicWithRskAddress(RskSubscription(topic=rsk_addr, subscriber=our_rsk_addr))
-        for response in topic:
-            if (response.channelPeerJoined.peerId):
-                topic_id = response.channelPeerJoined.peerId
-                print("peer ID for rsk address is", topic_id)
-                break
-            if (response.subscribeError.reason):
-                print("Error Subscribing",response.subscribeError.reason)
-                exit()
+        try:
+            for response in topic:
+                if (response.channelPeerJoined.peerId):
+                    topic_id = response.channelPeerJoined.peerId
+                    print("peer ID for rsk address is", topic_id)
+                    break
+        except RpcError as e:
+            print("Error Subscribing", str(e.details()))
+            exit()
 
         while True:
             try:
